@@ -8,7 +8,6 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#065f46">
   
-  <!-- প্রয়োজনীয় লাইব্রেরি -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
@@ -31,7 +30,7 @@
 </head>
 <body class="bg-slate-100 text-gray-800 pb-24 select-none min-h-screen">
 
-  <!-- ================= ১. বড় আধুনিক লগইন স্ক্রিন ================= -->
+  <!-- ================= ১. ৩-স্তরের লগইন স্ক্রিন ================= -->
   <div id="loginScreen" class="fixed inset-0 bg-gradient-to-b from-emerald-950 via-emerald-900 to-emerald-950 z-[100] flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl space-y-5 border border-emerald-100">
       <div class="text-center space-y-2">
@@ -42,7 +41,7 @@
         <p class="text-xs text-gray-500 font-medium leading-relaxed">পশ্চিম পালংখালী, ফরেস্ট অফিস সংলগ্ন, উখিয়া, কক্সবাজার</p>
       </div>
 
-      <!-- রোল সিলেকশন ট্যাব (বড় সাইজ) -->
+      <!-- রোল সিলেকশন ট্যাব -->
       <div class="flex bg-gray-100 p-1.5 rounded-2xl text-xs font-bold text-gray-600 gap-1 border border-gray-200">
         <button onclick="setLoginRole('admin')" id="lrole-admin" class="flex-1 py-2 rounded-xl active-tab transition">অ্যাডমিন</button>
         <button onclick="setLoginRole('teacher')" id="lrole-teacher" class="flex-1 py-2 rounded-xl transition">শিক্ষক</button>
@@ -52,7 +51,7 @@
       <!-- অ্যাডমিন ফর্ম -->
       <div id="form-role-admin" class="space-y-4 pt-1">
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1.5">অ্যাডমিন পাসওয়ার্ড / পিন (PIN):</label>
+          <label class="block text-xs font-bold text-gray-700 mb-1.5">অ্যাডমিন পিন (PIN):</label>
           <input type="text" id="adminPinInput" placeholder="7860" class="mask-pin w-full p-3.5 border-2 border-gray-200 focus:border-emerald-600 rounded-2xl text-center text-xl font-bold tracking-widest bg-gray-50 outline-none">
         </div>
         <button onclick="loginAsAdmin()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition">অ্যাডমিন ড্যাশবোর্ডে প্রবেশ</button>
@@ -84,12 +83,11 @@
 
   <!-- ================= ২. মূল অ্যাপ ইন্টারফেস ================= -->
   <div id="appContainer" class="hidden">
-    <!-- বড় হেডার ও লোগো -->
     <header class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-900 text-white shadow-lg sticky top-0 z-50">
       <div class="max-w-lg mx-auto p-4 pb-2">
         <div class="flex justify-between items-center mb-3">
           <div class="flex items-center gap-2.5">
-            <div class="w-13 h-13 w-12 h-12 rounded-full bg-white p-0.5 shadow-md flex items-center justify-center overflow-hidden border border-emerald-300">
+            <div class="w-12 h-12 rounded-full bg-white p-0.5 shadow-md flex items-center justify-center overflow-hidden border border-emerald-300">
               <img src="logo.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/80x80/065f46/ffffff?text=ABM';">
             </div>
             <div>
@@ -103,7 +101,6 @@
           </div>
         </div>
 
-        <!-- বড় ও সুন্দর নেভিগেশন ট্যাব -->
         <nav class="flex overflow-x-auto bg-emerald-950/50 p-1.5 rounded-2xl text-xs font-bold text-emerald-100 gap-1.5 no-scrollbar border border-emerald-700/50" id="navBar">
           <button onclick="switchTab('dashboard')" id="nav-dashboard" class="px-4 py-2 rounded-xl whitespace-nowrap active-tab transition">ড্যাশবোর্ড</button>
           <button onclick="switchTab('scanner')" id="nav-scanner" class="px-4 py-2 rounded-xl whitespace-nowrap transition">স্ক্যানার</button>
@@ -117,7 +114,7 @@
 
     <main class="max-w-lg mx-auto p-4 space-y-4">
 
-      <!-- ট্যাব ১: ড্যাশবোর্ড (বড় কার্ড) -->
+      <!-- ড্যাশবোর্ড -->
       <section id="tab-dashboard" class="space-y-4">
         <div class="grid grid-cols-2 gap-3.5">
           <div class="bg-white p-4 rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
@@ -138,7 +135,6 @@
           </div>
         </div>
 
-        <!-- লাইভ ফিড -->
         <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-200">
           <h3 class="font-extrabold text-sm text-gray-800 mb-3 border-b pb-2 flex items-center justify-between">
             <span>সর্বশেষ হাজিরা ফিড</span>
@@ -150,7 +146,7 @@
         </div>
       </section>
 
-      <!-- ট্যাব ২: QR স্ক্যানার -->
+      <!-- স্ক্যানার -->
       <section id="tab-scanner" class="hidden space-y-4">
         <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-200">
           <div class="flex gap-2 mb-3">
@@ -171,14 +167,14 @@
         </div>
       </section>
 
-      <!-- ট্যাব ৩: শিক্ষার্থী ব্যবস্থাপনা -->
+      <!-- শিক্ষার্থী ব্যবস্থাপনা -->
       <section id="tab-students" class="hidden space-y-4">
         <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
           <div>
             <h2 class="font-bold text-sm text-gray-800">শিক্ষার্থী তালিকা</h2>
             <p class="text-[11px] text-gray-400">মোট ভর্তি ও কার্ড প্রিন্ট</p>
           </div>
-          <button onclick="openAdmissionModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-4 py-2.5 rounded-xl font-bold shadow transition" id="btn-add-stu">+ নতুন ভর্তি</button>
+          <button onclick="openAdmissionModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-4 py-2.5 rounded-xl font-bold shadow transition">+ নতুন ভর্তি</button>
         </div>
 
         <select id="filterClass" onchange="renderStudentList()" class="w-full p-3 border-2 border-gray-200 rounded-2xl text-xs font-bold bg-white outline-none">
@@ -194,19 +190,19 @@
         <div id="studentListContainer" class="space-y-2.5"></div>
       </section>
 
-      <!-- ট্যাব ৪: শিক্ষক ব্যবস্থাপনা -->
+      <!-- শিক্ষক ব্যবস্থাপনা (ক্লাউড সিঙ্ক, ডিটেইলস ও ডিলিটসহ) -->
       <section id="tab-teachers" class="hidden space-y-4">
         <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
           <div>
             <h2 class="font-bold text-sm text-gray-800">শিক্ষক তালিকা</h2>
-            <p class="text-[11px] text-gray-400">নিবন্ধিত উস্তাদবৃন্দ</p>
+            <p class="text-[11px] text-gray-400">ক্লাউড সিঙ্ক ও শিক্ষক নিয়ন্ত্রণ</p>
           </div>
           <button onclick="openTeacherModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-4 py-2.5 rounded-xl font-bold shadow transition">+ নতুন শিক্ষক</button>
         </div>
         <div id="teacherListContainer" class="space-y-2.5"></div>
       </section>
 
-      <!-- ট্যাব ৫: অভিভাবক পোর্টাল -->
+      <!-- অভিভাবক পোর্টাল -->
       <section id="tab-parents" class="hidden space-y-4">
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200">
           <h2 class="font-bold text-sm text-gray-800">অভিভাবক পোর্টাল</h2>
@@ -215,7 +211,7 @@
         <div id="parentPortalCards" class="space-y-3.5"></div>
       </section>
 
-      <!-- ট্যাব ৬: রিপোর্ট ও হিস্টোরি -->
+      <!-- রিপোর্ট ও হিস্টোরি -->
       <section id="tab-reports" class="hidden space-y-4">
         <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-200 space-y-3">
           <h2 class="font-bold text-sm text-gray-800">রিপোর্ট ডাউনলোড ও প্রিন্ট</h2>
@@ -236,12 +232,20 @@
         </div>
       </section>
 
-      <!-- ট্যাব ৭: সেটিংস -->
+      <!-- সেটিংস (ক্লাউড সিঙ্কসহ) -->
       <section id="tab-settings" class="hidden space-y-4">
         <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-200 space-y-3">
+          <h2 class="font-bold text-sm text-gray-800">অ্যাডমিন পিন পরিবর্তন (সব ডিভাইসে আপডেট হবে)</h2>
+          <p class="text-[11px] text-gray-500">এখানে পিন পরিবর্তন করলে তা সাথে সাথে ক্লাউডে সেভ হবে এবং সব শিক্ষকের ফোনে কার্যকর হবে।</p>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">নতুন অ্যাডমিন পিন:</label>
+            <input type="text" id="cfg_admin_pin" placeholder="7860" class="mask-pin w-full p-3 border-2 border-gray-200 rounded-2xl text-xs font-bold outline-none">
+          </div>
+          <button onclick="saveAdminPin()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3 rounded-2xl text-xs font-bold shadow transition">ক্লাউডে পিন পরিবর্তন করুন</button>
+        </div>
+
+        <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-200 space-y-3">
           <h2 class="font-bold text-sm text-gray-800">WhatsApp Auto-Send গেটওয়ে</h2>
-          <p class="text-[11px] text-gray-500 leading-relaxed">এখানে API বসালে স্ক্যান করার সাথে সাথে ব্যাকগ্রাউন্ডে অটো-মেসেজ চলে যাবে। না দিলে ১-ক্লিক ফ্রি অপশন চালু থাকবে।</p>
-          
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Gateway API URL</label>
             <input type="text" id="cfg_wa_url" placeholder="https://api.ultramsg.com/instance/messages/chat" class="w-full p-2.5 border-2 rounded-xl text-xs outline-none">
@@ -252,17 +256,20 @@
           </div>
           <button onclick="saveWhatsAppConfig()" class="w-full bg-emerald-700 text-white py-2.5 rounded-xl text-xs font-bold shadow">WhatsApp API সংরক্ষণ করুন</button>
         </div>
-
-        <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-200 space-y-3">
-          <h2 class="font-bold text-sm text-gray-800">অ্যাডমিন পিন পরিবর্তন</h2>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">নতুন অ্যাডমিন পিন:</label>
-            <input type="text" id="cfg_admin_pin" placeholder="7860" class="mask-pin w-full p-2.5 border-2 rounded-xl text-xs outline-none">
-          </div>
-          <button onclick="saveAdminPin()" class="w-full bg-emerald-700 text-white py-2.5 rounded-xl text-xs font-bold shadow">নতুন পিন সংরক্ষণ</button>
-        </div>
       </section>
     </main>
+  </div>
+
+  <!-- শিক্ষক বিস্তারিত দেখার মডাল -->
+  <div id="teacherDetailsModal" class="fixed inset-0 bg-black/75 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl space-y-4">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="font-bold text-gray-800 text-sm">শিক্ষকের বিস্তারিত বিবরণ</h3>
+        <button onclick="document.getElementById('teacherDetailsModal').classList.add('hidden')" class="text-gray-400 font-bold text-2xl">&times;</button>
+      </div>
+      <div class="space-y-2.5 text-xs text-gray-700" id="teacherDetailsContent"></div>
+      <button onclick="document.getElementById('teacherDetailsModal').classList.add('hidden')" class="w-full bg-emerald-700 text-white py-2.5 rounded-2xl font-bold shadow">বন্ধ করুন</button>
+    </div>
   </div>
 
   <!-- শিক্ষার্থী ভর্তি ও এডিট মডাল -->
@@ -323,7 +330,7 @@
   <div id="teacherModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-5 max-h-[85vh] overflow-y-auto space-y-3">
       <div class="flex justify-between items-center border-b pb-2">
-        <h3 class="font-bold text-gray-800 text-sm">নতুন শিক্ষক নিবন্ধন</h3>
+        <h3 class="font-bold text-gray-800 text-sm">নতুন শিক্ষক নিবন্ধন (ক্লাউড সংরক্ষণ)</h3>
         <button onclick="closeTeacherModal()" class="text-gray-400 font-bold text-2xl">&times;</button>
       </div>
       <form id="teacherForm" onsubmit="handleTeacherAdd(event)" class="space-y-3 text-xs">
@@ -343,12 +350,12 @@
           <label class="block font-bold text-gray-700 mb-1">লগইন পিন *</label>
           <input type="text" id="t_form_pin" placeholder="1234" required class="mask-pin w-full p-2.5 border-2 rounded-xl text-center font-bold outline-none">
         </div>
-        <button type="submit" class="w-full bg-emerald-700 text-white py-3 rounded-2xl font-bold shadow-md">নিবন্ধন নিশ্চিত করুন</button>
+        <button type="submit" class="w-full bg-emerald-700 text-white py-3 rounded-2xl font-bold shadow-md">ক্লাউডে শিক্ষক সংরক্ষণ</button>
       </form>
     </div>
   </div>
 
-  <!-- ডিজিটাল আইডি কার্ড মডাল (অফিসিয়াল লোগোসহ) -->
+  <!-- ডিজিটাল আইডি কার্ড মডাল -->
   <div id="idCardModal" class="fixed inset-0 bg-black/75 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-5 max-w-xs w-full text-center space-y-4 shadow-2xl">
       <div id="printableCard" class="border-2 border-emerald-800 rounded-2xl p-4 bg-emerald-50/40 relative overflow-hidden">
@@ -388,8 +395,26 @@
     let currentUser = null;
     let studentsList = [];
     let teachersList = [];
+    let cloudAdminPin = '7860'; // ক্লাউড থেকে লোড হবে
     let currentScanMode = 'student';
     let html5QrCode = null;
+
+    /* ================= ক্লাউড সেটিংস ও পিন লোড ================= */
+    async function loadCloudSettings() {
+      try {
+        const { data, error } = await db.from('app_settings').select('*');
+        if (!error && data) {
+          const pinObj = data.find(item => item.key === 'admin_pin');
+          if (pinObj) cloudAdminPin = pinObj.value;
+          const waUrlObj = data.find(item => item.key === 'wa_url');
+          if (waUrlObj) localStorage.setItem('cfg_wa_url', waUrlObj.value);
+          const waTokenObj = data.find(item => item.key === 'wa_token');
+          if (waTokenObj) localStorage.setItem('cfg_wa_token', waTokenObj.value);
+        }
+      } catch (e) {
+        console.error("Settings load failed", e);
+      }
+    }
 
     /* ================= লগইন সিস্টেম ================= */
     function setLoginRole(role) {
@@ -401,10 +426,10 @@
       document.getElementById(`lrole-${role}`).classList.add('active-tab');
     }
 
-    function loginAsAdmin() {
+    async function loginAsAdmin() {
+      await loadCloudSettings(); // প্রতিবার লগইনের সময় ক্লাউড থেকে তাজা পিন চেক করা
       const pin = document.getElementById('adminPinInput').value.trim();
-      const savedPin = localStorage.getItem('madrasa_admin_pin') || '7860';
-      if (pin === savedPin) {
+      if (pin === cloudAdminPin) {
         currentUser = { role: 'admin', name: 'প্রধান অ্যাডমিন' };
         initSession();
       } else {
@@ -412,15 +437,18 @@
       }
     }
 
-    function loginAsTeacher() {
+    async function loginAsTeacher() {
       const phone = document.getElementById('teacherPhoneInput').value.trim();
       const pin = document.getElementById('teacherPinInput').value.trim();
-      const teacher = teachersList.find(t => t.phone === phone && (t.pin === pin || pin === '1234'));
-      if (teacher) {
+      
+      // ক্লাউড শিক্ষক তালিকা থেকে ভেরিফাই করা
+      const { data: teacher, error } = await db.from('teachers').select('*').eq('phone', phone).single();
+      
+      if (!error && teacher && (teacher.pin === pin || pin === '1234')) {
         currentUser = { role: 'teacher', name: teacher.name, phone: teacher.phone };
         initSession();
       } else {
-        alert('ভুল শিক্ষক নম্বর বা পিন!');
+        alert('ভুল শিক্ষক মোবাইল নম্বর বা পিন!');
       }
     }
 
@@ -628,11 +656,13 @@
       document.getElementById("idCardModal").classList.remove("hidden");
     }
 
-    /* ================= শিক্ষক ব্যবস্থাপনা ================= */
+    /* ================= শিক্ষক ব্যবস্থাপনা (সম্পূর্ণ ক্লাউড সিঙ্ক) ================= */
     async function loadTeachers() {
-      const localTeachers = JSON.parse(localStorage.getItem('madrasa_teachers') || '[]');
-      teachersList = localTeachers;
-      renderTeacherList();
+      const { data, error } = await db.from('teachers').select('*').order('created_at', { ascending: false });
+      if (!error && data) {
+        teachersList = data;
+        renderTeacherList();
+      }
     }
 
     function openTeacherModal() {
@@ -644,13 +674,12 @@
       document.getElementById("teacherModal").classList.add("hidden");
     }
 
-    function handleTeacherAdd(e) {
+    async function handleTeacherAdd(e) {
       e.preventDefault();
       const tId = 'TEA-' + String(teachersList.length + 1).padStart(3, '0');
-      const token = 'TEA-TOKEN-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+      const token = 'TEA-' + Math.random().toString(36).substring(2, 10).toUpperCase();
 
       const newTeacher = {
-        id: token,
         uid: tId,
         name: document.getElementById("t_form_name").value,
         designation: document.getElementById("t_form_designation").value,
@@ -659,12 +688,15 @@
         qr_token: token
       };
 
-      teachersList.unshift(newTeacher);
-      localStorage.setItem('madrasa_teachers', JSON.stringify(teachersList));
-      alert("শিক্ষক নিবন্ধন সফল হয়েছে!");
-      closeTeacherModal();
-      renderTeacherList();
-      loadDashboard();
+      const { error } = await db.from('teachers').insert([newTeacher]);
+      if (error) {
+        alert("ত্রুটি: " + error.message);
+      } else {
+        alert("আলহামদুলিল্লাহ! শিক্ষক ক্লাউডে সফলভাবে নিবন্ধিত হয়েছেন। সব ফোনে আপডেট হয়ে গেছে।");
+        closeTeacherModal();
+        loadTeachers();
+        loadDashboard();
+      }
     }
 
     function renderTeacherList() {
@@ -677,16 +709,53 @@
       teachersList.forEach(t => {
         const div = document.createElement("div");
         div.className = "bg-white p-3.5 rounded-2xl border border-gray-100 shadow-sm flex justify-between items-center";
+        
+        let actions = `
+          <button onclick="openTeacherCard('${t.id}')" class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs px-2.5 py-1.5 rounded-xl font-bold">QR কার্ড</button>
+          <button onclick="viewTeacherDetails('${t.id}')" class="bg-blue-50 text-blue-700 border border-blue-200 text-xs px-2.5 py-1.5 rounded-xl font-bold">বিস্তারিত</button>
+        `;
+        if (currentUser && currentUser.role === 'admin') {
+          actions += `<button onclick="deleteTeacher('${t.id}')" class="bg-rose-50 text-rose-700 border border-rose-200 text-xs px-2.5 py-1.5 rounded-xl font-bold">ডিলিট</button>`;
+        }
+
         div.innerHTML = `
           <div>
             <h4 class="font-bold text-sm text-gray-800">${t.name}</h4>
             <p class="text-xs text-emerald-700 font-semibold mt-0.5">${t.designation} (${toBangla(t.uid)})</p>
             <p class="text-[11px] text-gray-400 mt-0.5">ফোন: ${t.phone}</p>
           </div>
-          <button onclick="openTeacherCard('${t.id}')" class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs px-3 py-1.5 rounded-xl font-bold">QR কার্ড</button>
+          <div class="flex gap-1.5">${actions}</div>
         `;
         container.appendChild(div);
       });
+    }
+
+    function viewTeacherDetails(id) {
+      const t = teachersList.find(x => x.id === id);
+      if (!t) return;
+      document.getElementById('teacherDetailsContent').innerHTML = `
+        <div class="bg-gray-50 p-3 rounded-2xl space-y-1.5 border">
+          <p><strong>শিক্ষকের নাম:</strong> ${t.name}</p>
+          <p><strong>পদবী:</strong> ${t.designation}</p>
+          <p><strong>শিক্ষক আইডি:</strong> ${toBangla(t.uid)}</p>
+          <p><strong>মোবাইল নম্বর:</strong> ${t.phone}</p>
+          ${currentUser && currentUser.role === 'admin' ? `<p class="text-emerald-700 font-bold"><strong>লগইন পিন:</strong> ${t.pin}</p>` : ''}
+          <p class="text-[10px] text-gray-400 mt-2">নিবন্ধন তারিখ: ${new Date(t.created_at).toLocaleDateString('bn-BD')}</p>
+        </div>
+      `;
+      document.getElementById('teacherDetailsModal').classList.remove('hidden');
+    }
+
+    async function deleteTeacher(id) {
+      if (!confirm("আপনি কি নিশ্চিতভাবে এই শিক্ষককে মুছে ফেলতে চান? এটি মুছে দিলে সব মোবাইল থেকেই মুছে যাবে।")) return;
+      const { error } = await db.from('teachers').delete().eq('id', id);
+      if (error) {
+        alert("ডিলিট করতে সমস্যা হয়েছে: " + error.message);
+      } else {
+        alert("শিক্ষক ক্লাউড থেকে সফলভাবে মুছে ফেলা হয়েছে!");
+        loadTeachers();
+        loadDashboard();
+      }
     }
 
     function openTeacherCard(id) {
@@ -738,7 +807,34 @@
       }
     }
 
-    /* ================= WhatsApp অটো-মেসেজ ================= */
+    /* ================= WhatsApp ও ক্লাউড পিন সেভ ================= */
+    async function saveAdminPin() {
+      const p = document.getElementById('cfg_admin_pin').value.trim();
+      if (!p) { alert("একটি পিন লিখুন!"); return; }
+
+      // সরাসরি ক্লাউডে পিন আপডেট
+      const { error } = await db.from('app_settings').upsert({ key: 'admin_pin', value: p });
+      if (error) {
+        alert("পিন পরিবর্তন ব্যর্থ: " + error.message);
+      } else {
+        cloudAdminPin = p;
+        alert("আলহামদুলিল্লাহ! অ্যাডমিন পিন সফলভাবে ক্লাউডে পরিবর্তন হয়েছে। সব শিক্ষকের মোবাইলে এটি সাথে সাথে কার্যকর হয়ে যাবে!");
+        document.getElementById('cfg_admin_pin').value = '';
+      }
+    }
+
+    async function saveWhatsAppConfig() {
+      const url = document.getElementById('cfg_wa_url').value.trim();
+      const token = document.getElementById('cfg_wa_token').value.trim();
+
+      await db.from('app_settings').upsert({ key: 'wa_url', value: url });
+      await db.from('app_settings').upsert({ key: 'wa_token', value: token });
+      
+      localStorage.setItem('cfg_wa_url', url);
+      localStorage.setItem('cfg_wa_token', token);
+      alert('WhatsApp গেটওয়ে ক্লাউডে সংরক্ষিত হয়েছে!');
+    }
+
     async function triggerWhatsAppAutoSend(phone, studentName, session) {
       const waUrl = localStorage.getItem('cfg_wa_url');
       const waToken = localStorage.getItem('cfg_wa_token');
@@ -757,23 +853,6 @@
         }
       }
       return { auto: false, msg: msg };
-    }
-
-    function saveWhatsAppConfig() {
-      const url = document.getElementById('cfg_wa_url').value.trim();
-      const token = document.getElementById('cfg_wa_token').value.trim();
-      localStorage.setItem('cfg_wa_url', url);
-      localStorage.setItem('cfg_wa_token', token);
-      alert('WhatsApp গেটওয়ে কনফিগারেশন সংরক্ষিত হয়েছে!');
-    }
-
-    function saveAdminPin() {
-      const p = document.getElementById('cfg_admin_pin').value.trim();
-      if (p) {
-        localStorage.setItem('madrasa_admin_pin', p);
-        alert('অ্যাডমিন পিন সফলভাবে পরিবর্তন হয়েছে!');
-        document.getElementById('cfg_admin_pin').value = '';
-      }
     }
 
     /* ================= স্ক্যানার ও হাজিরা গ্রহণ ================= */
@@ -845,8 +924,10 @@
     async function loadDashboard() {
       const today = new Date().toISOString().split('T')[0];
       const { count: total } = await db.from('students').select('*', { count: 'exact', head: true });
+      const { count: teacherTotal } = await db.from('teachers').select('*', { count: 'exact', head: true });
+      
       document.getElementById("statTotalStudents").innerText = toBangla(total || 0);
-      document.getElementById("statTotalTeachers").innerText = toBangla(teachersList.length || 0);
+      document.getElementById("statTotalTeachers").innerText = toBangla(teacherTotal || teachersList.length || 0);
 
       const { data: attToday } = await db.from('attendance').select('student_id, student_name, class_name, scan_time').eq('attendance_date', today);
       const uniquePresent = new Set(attToday?.map(a => a.student_id)).size;
@@ -920,7 +1001,8 @@
       XLSX.writeFile(wb, `attendance_${date}.xlsx`);
     }
 
-    window.addEventListener("DOMContentLoaded", () => {
+    window.addEventListener("DOMContentLoaded", async () => {
+      await loadCloudSettings();
       document.getElementById("reportDate").value = new Date().toISOString().split('T')[0];
       loadStudents();
       loadTeachers();
@@ -933,4 +1015,4 @@
     });
   </script>
 </body>
-  </html>
+        </html>
