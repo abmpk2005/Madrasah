@@ -1,0 +1,15 @@
+{
+  "name": "মাদ্রাসা আনাস বিন মালেক (রাঃ)",
+  "short_name": "মাদ্রাসা হাজিরা",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#065f46",
+  "theme_color": "#065f46",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    }
+  ]
+}
