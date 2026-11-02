@@ -124,76 +124,64 @@
     <!-- মূল কন্টেন্ট স্ক্রিনসমূহ -->
     <main class="max-w-md mx-auto p-3.5 space-y-4">
 
-      <!-- ================= ট্যাব ক: ১২-গ্রিড হোম ড্যাশবোর্ড (ডিফল্ট ল্যান্ডিং পেজ) ================= -->
+      <!-- ================= ট্যাব ক: ১২-গ্রিড হোম ড্যাশবোর্ড ================= -->
       <section id="view-grid" class="space-y-4">
         <div class="grid grid-cols-3 gap-3">
-          <!-- ১. উপস্থিতি -->
           <button onclick="openTab('attendance')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center text-xl shadow-sm">📅</div>
             <span class="text-xs font-bold text-gray-700">উপস্থিতি</span>
           </button>
 
-          <!-- ২. শিক্ষার্থীরা -->
           <button onclick="openTab('students')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-teal-500 text-white flex items-center justify-center text-xl shadow-sm">👤</div>
             <span class="text-xs font-bold text-gray-700">শিক্ষার্থী</span>
           </button>
 
-          <!-- ৩. শিক্ষকবৃন্দ -->
           <button onclick="openTab('teachers')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-blue-500 text-white flex items-center justify-center text-xl shadow-sm">👨‍🏫</div>
             <span class="text-xs font-bold text-gray-700">শিক্ষকবৃন্দ</span>
           </button>
 
-          <!-- ৪. ফেস হাজিরা -->
           <button onclick="openTab('facescan')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-purple-500 text-white flex items-center justify-center text-xl shadow-sm">📸</div>
             <span class="text-xs font-bold text-gray-700">ফেস হাজিরা</span>
           </button>
 
-          <!-- ৫. রিপোর্ট ফাইন্ডার -->
           <button onclick="openTab('reports')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-xl shadow-sm">📊</div>
             <span class="text-xs font-bold text-gray-700">রিপোর্ট</span>
           </button>
 
-          <!-- ৬. নোটিশ বোর্ড -->
           <button onclick="openTab('notices')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-xl shadow-sm">📢</div>
             <span class="text-xs font-bold text-gray-700">নোটিশ বোর্ড</span>
           </button>
 
-          <!-- ৭. আইডি কার্ড -->
           <button onclick="openTab('students')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-indigo-500 text-white flex items-center justify-center text-xl shadow-sm">🗂️</div>
             <span class="text-xs font-bold text-gray-700">আইডি কার্ড</span>
           </button>
 
-          <!-- ৮. অভিভাবক পোর্টাল -->
           <button onclick="openTab('parents')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-sky-500 text-white flex items-center justify-center text-xl shadow-sm">👪</div>
             <span class="text-xs font-bold text-gray-700">অভিভাবক</span>
           </button>
 
-          <!-- ৯. ছুটি মোড -->
           <button onclick="openTab('holidays')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center text-xl shadow-sm">🛑</div>
             <span class="text-xs font-bold text-gray-700">ছুটি মোড</span>
           </button>
 
-          <!-- ১০. শিক্ষার্থী ফি -->
           <button onclick="openTab('fees')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl shadow-sm">💳</div>
             <span class="text-xs font-bold text-gray-700">শিক্ষার্থী ফি</span>
           </button>
 
-          <!-- ১১. সকল ক্লাস -->
           <button onclick="openTab('students')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-pink-500 text-white flex items-center justify-center text-xl shadow-sm">🏫</div>
             <span class="text-xs font-bold text-gray-700">সকল ক্লাস</span>
           </button>
 
-          <!-- ১২. সেটিংস -->
           <button onclick="openTab('settings')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-slate-600 text-white flex items-center justify-center text-xl shadow-sm">⚙️</div>
             <span class="text-xs font-bold text-gray-700">সেটিংস</span>
@@ -271,7 +259,7 @@
         </div>
       </section>
 
-      <!-- ================= ট্যাব ঘ: শিক্ষার্থী তালিকা (বিস্তারিত ও ডিলিটসহ) ================= -->
+      <!-- ================= ট্যাব ঘ: শিক্ষার্থী তালিকা ================= -->
       <section id="view-students" class="hidden space-y-3.5">
         <div class="flex justify-between items-center bg-white p-3.5 rounded-2xl border shadow-sm">
           <select id="filterClassStudent" onchange="renderStudentsUI()" class="p-2 border rounded-xl text-xs font-bold bg-gray-50 outline-none">
@@ -292,7 +280,7 @@
         <div id="studentsListCardsContainer" class="space-y-2"></div>
       </section>
 
-      <!-- ================= ট্যাব ঙ: শিক্ষক তালিকা (QR কার্ড, বিস্তারিত ও ডিলিটসহ) ================= -->
+      <!-- ================= ট্যাব ঙ: শিক্ষক তালিকা ================= -->
       <section id="view-teachers" class="hidden space-y-3.5">
         <div class="flex justify-between items-center bg-white p-3.5 rounded-2xl border shadow-sm">
           <div>
@@ -392,19 +380,16 @@
     <!-- ================= ৩. সেন্ট্রাল ডক বটম নেভিগেশন ================= -->
     <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-1.5 px-3 z-40 shadow-[0_-4px_15px_rgba(0,0,0,0.06)]">
       <div class="max-w-md mx-auto flex justify-between items-center text-[10px] font-bold text-gray-500">
-        <!-- ১. ক্লাসসমূহ -->
         <button onclick="openTab('students')" class="flex flex-col items-center flex-1">
           <span class="text-lg">📚</span>
           <span class="mt-0.5">ক্লাসসমূহ</span>
         </button>
 
-        <!-- ২. শিক্ষার্থীরা -->
         <button onclick="openTab('students')" class="flex flex-col items-center flex-1">
           <span class="text-lg">🙋‍♂️</span>
           <span class="mt-0.5">শিক্ষার্থীরা</span>
         </button>
 
-        <!-- ৩. সেন্ট্রাল উঁচুতে থাকা নীল গ্রিড লঞ্চার বাটন -->
         <div class="flex flex-col items-center -mt-6">
           <button onclick="openTab('grid')" class="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl shadow-lg border-4 border-white active:scale-95 transition">
             ⊞
@@ -412,13 +397,11 @@
           <span class="text-[9px] text-blue-700 font-extrabold mt-0.5">মেনু</span>
         </div>
 
-        <!-- ৪. হাজিরা -->
         <button onclick="openTab('attendance')" class="flex flex-col items-center flex-1">
           <span class="text-lg">📋</span>
           <span class="mt-0.5">হাজিরা</span>
         </button>
 
-        <!-- ৫. রিপোর্ট ও ফি -->
         <button onclick="openTab('reports')" class="flex flex-col items-center flex-1">
           <span class="text-lg">💳</span>
           <span class="mt-0.5">রিপোর্ট</span>
@@ -464,7 +447,7 @@
     </div>
   </div>
 
-  <!-- মডাল ৩: ডিজিটাল আইডি কার্ড (শিক্ষার্থী ও শিক্ষক উভয়ের জন্য) -->
+  <!-- মডাল ৩: ডিজিটাল আইডি কার্ড (ক্র্যাশ-প্রুফ নিরাপদ শেয়ার ও ডাউনলোড) -->
   <div id="idCardModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-4 max-w-xs w-full text-center space-y-3 shadow-2xl">
       <div id="printableCard" class="bg-[#faf8f5] rounded-3xl border-2 border-[#065f46] overflow-hidden relative shadow-md text-left pb-4">
@@ -509,16 +492,34 @@
         </div>
       </div>
 
+      <!-- নিরাপদ অ্যাকশন বাটনসমূহ (ক্র্যাশ করবে না) -->
       <div class="space-y-2">
-        <button onclick="downloadIdCardAsImage()" class="w-full bg-[#065f46] hover:bg-emerald-800 text-white py-2.5 rounded-xl font-bold text-xs shadow flex items-center justify-center gap-1">
-          <span>📥 কার্ড ডাউনলোড করুন (HD ছবি)</span>
+        <button onclick="downloadIdCardSafe()" class="w-full bg-[#065f46] hover:bg-emerald-800 text-white py-3 rounded-2xl font-bold text-xs shadow-md flex items-center justify-center gap-1.5 transition">
+          <span>📤 কার্ড সেভ করুন / WhatsApp-এ পাঠান</span>
         </button>
         <button onclick="document.getElementById('idCardModal').classList.add('hidden')" class="w-full bg-gray-200 text-gray-800 py-2 rounded-xl text-xs font-bold">বন্ধ করুন</button>
       </div>
     </div>
   </div>
 
-  <!-- মডাল ৪: শিক্ষার্থী ভর্তি ও এডিট (ছবি সহ) -->
+  <!-- মডাল ৩.১: কার্ড সেভ প্রিভিউ মডাল (বিকল্প নিরাপদ পদ্ধতি) -->
+  <div id="cardPreviewModal" class="fixed inset-0 bg-black/90 z-[60] hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-4 max-w-xs w-full text-center space-y-3 shadow-2xl">
+      <h4 class="font-bold text-xs text-gray-800">কার্ডটি তৈরি হয়েছে!</h4>
+      <p class="text-[10px] text-gray-500">নিচের ছবির ওপর আঙুল দিয়ে **চেপে ধরে রাখুন (Long Press)** এবং **"Download image"** চাপুন।</p>
+      
+      <div class="rounded-2xl overflow-hidden border shadow-inner max-h-[360px] overflow-y-auto">
+        <img id="safePreviewImage" src="" class="w-full h-auto">
+      </div>
+
+      <div class="flex gap-2">
+        <a id="btnShareWhatsAppCard" href="#" target="_blank" class="flex-1 bg-emerald-700 text-white py-2 rounded-xl text-xs font-bold">WhatsApp</a>
+        <button onclick="document.getElementById('cardPreviewModal').classList.add('hidden')" class="flex-1 bg-gray-200 text-gray-800 py-2 rounded-xl text-xs font-bold">বন্ধ করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- মডাল ৪: শিক্ষার্থী ভর্তি ও এডিট -->
   <div id="admissionModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-5 max-h-[85vh] overflow-y-auto space-y-3">
       <div class="flex justify-between items-center border-b pb-2">
@@ -580,7 +581,7 @@
     </div>
   </div>
 
-  <!-- মডাল ৬: শিক্ষার্থী/শিক্ষক বিস্তারিত দেখার মডাল -->
+  <!-- মডাল ৬: বিস্তারিত বিবরণ -->
   <div id="detailsModal" class="fixed inset-0 bg-black/75 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl space-y-3">
       <div class="flex justify-between items-center border-b pb-2">
@@ -592,7 +593,7 @@
     </div>
   </div>
 
-  <!-- মডাল ৭: নোটিশ যোগ -->
+  <!-- মডাল ৭: নোটিশ প্রকাশ -->
   <div id="noticeModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-5 space-y-3">
       <div class="flex justify-between items-center border-b pb-2">
@@ -700,14 +701,11 @@
       }
     }
 
-    // লগইন বা অ্যাপ ওপেনের সময় ১২-গ্রিড ড্যাশবোর্ড ল্যান্ডিং পেজ হিসেবে আসবে
     function initApp() {
       sessionStorage.setItem('madrasa_user', JSON.stringify(currentUser));
       document.getElementById('loginScreen').classList.add('hidden');
       document.getElementById('appContainer').classList.remove('hidden');
       document.getElementById('userRoleBadge').textContent = currentUser.role === 'admin' ? 'অ্যাডমিন' : (currentUser.name || 'অভিভাবক');
-      
-      // ড্যাশবোর্ড স্ক্রিন প্রথমে ওপেন করা
       openTab('grid');
     }
 
@@ -1001,7 +999,7 @@
           </div>
           <div class="flex items-center gap-1.5 flex-wrap justify-end">
             <button onclick="openTeacherCardModal('${t.id}')" class="bg-[#065f46] text-white text-[10px] px-2.5 py-1 rounded-xl font-bold">QR কার্ড</button>
-            <button onclick="viewTeacherDetails('${t.id}')" class="bg-blue-50 text-blue-700 border border-blue-200 text-[10px] px-2 py-1 rounded-xl font-bold">বিস্তারিত</button>
+            <button onclick="viewTeacherDetails('${t.id}')" class="bg-blue-50 text-blue-700 border border-blue-200 text-[10px] px-2.5 py-1 rounded-xl font-bold">বিস্তারিত</button>
             ${currentUser && currentUser.role === 'admin' ? `
               <button onclick="deleteTeacher('${t.id}')" class="bg-rose-50 text-rose-700 border border-rose-200 text-[10px] px-2 py-1 rounded-xl font-bold">ডিলিট</button>
             ` : ''}
@@ -1078,15 +1076,46 @@
       document.getElementById('idCardModal').classList.remove('hidden');
     }
 
-    async function downloadIdCardAsImage() {
+    /* ================= ১০০% ক্র্যাশ-প্রুফ নিরাপদ কার্ড সেভ ও শেয়ার ================= */
+    async function downloadIdCardSafe() {
       const card = document.getElementById('printableCard');
       const name = document.getElementById('cardStudentName').innerText.trim();
-      const canvas = await html2canvas(card, { scale: 3, useCORS: true, backgroundColor: '#ffffff' });
-      const a = document.createElement('a');
-      a.download = `Card_${name}.png`;
-      a.href = canvas.toDataURL('image/png');
-      a.click();
-      alert('আইডি কার্ডের হাই-রেজোলিউশন ছবিটি আপনার ফোনে ডাউনলোড হয়েছে!');
+
+      try {
+        // লো-মেমোরি সেফ রেন্ডারিং (scale: 2) যাতে অ্যাপ ক্র্যাশ না করে
+        const canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+        
+        // ১. অ্যান্ড্রয়েডের নেটিভ ফাইল শেয়ার চেষ্টা করা (ক্র্যাশ ছাড়া সেরা উপায়)
+        canvas.toBlob(async (blob) => {
+          if (!blob) {
+            throw new Error("Blob তৈরি হয়নি");
+          }
+          
+          const file = new File([blob], `Card_${name}.png`, { type: 'image/png' });
+
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+              await navigator.share({
+                files: [file],
+                title: `মাদ্রাসা আইডি কার্ড - ${name}`,
+                text: `মাদ্রাসা আনাস বিন মালেক (রাঃ) - ${name}`
+              });
+              return; // শেয়ার উইন্ডো ওপেন হয়েছে, কাজ শেষ
+            } catch (shareErr) {
+              console.log("শেয়ার ডায়ালগ বাতিল বা এরর:", shareErr);
+            }
+          }
+
+          // ২. ফলব্যাক: যদি শেয়ার সমর্থন না করে, তবে নিরাপদ প্রিভিউ মডাল দেখানো
+          const dataUrl = canvas.toDataURL('image/png');
+          document.getElementById('safePreviewImage').src = dataUrl;
+          document.getElementById('btnShareWhatsAppCard').href = `https://wa.me/?text=${encodeURIComponent(`মাদ্রাসা আনাস বিন মালেক (রাঃ)-এর আইডি কার্ড: ${name}`)}`;
+          document.getElementById('cardPreviewModal').classList.remove('hidden');
+        }, 'image/png');
+
+      } catch (err) {
+        alert("কার্ড প্রসেস করার বিকল্প পদ্ধতি: স্ক্রিনশট নিয়ে নিন অথবা ছবিটি প্রিভিউ করুন।");
+      }
     }
 
     /* ================= স্ক্যানার ও ম্যানুয়াল হাজিরা ================= */
@@ -1305,7 +1334,6 @@
         initApp();
       }
 
-      // ক্লাউড ডেটা প্রতি ৫ সেকেন্ডে অটো সিঙ্ক
       setInterval(async () => {
         if (currentUser) {
           await loadDataFromCloud();
@@ -1314,4 +1342,4 @@
     });
   </script>
 </body>
-          </html>
+              </html>
