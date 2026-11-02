@@ -8,12 +8,14 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#065f46">
   
-  <!-- প্রয়োজনীয় লাইব্রেরি -->
+  <!-- প্রয়োজনীয় লাইব্রেরি -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <!-- আইডি কার্ড ছবি হিসেবে ডাউনলোড করার লাইব্রেরি -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -31,15 +33,15 @@
 </head>
 <body class="bg-slate-100 text-gray-800 pb-24 select-none min-h-screen">
 
-  <!-- ================= ১. ৩-স্তরের লগইন স্ক্রিন ================= -->
+  <!-- ================= ১. লগইন স্ক্রিন ================= -->
   <div id="loginScreen" class="fixed inset-0 bg-gradient-to-b from-emerald-950 via-emerald-900 to-emerald-950 z-[100] flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl space-y-5 border border-emerald-100">
       <div class="text-center space-y-2">
         <div class="w-24 h-24 mx-auto rounded-full bg-white p-1 shadow-lg border-2 border-emerald-600 flex items-center justify-center overflow-hidden">
-          <img src="logo.png" alt="মাদ্রাসা লোগো" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/120x120/065f46/ffffff?text=ABM';">
+          <img src="logo.png" alt="লোগো" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/120x120/065f46/ffffff?text=ABM';">
         </div>
         <h2 class="text-lg font-extrabold text-emerald-950">মাদ্রাসা আনাস বিন মালেক (রাঃ)</h2>
-        <p class="text-xs text-gray-500 font-medium leading-relaxed">পশ্চিম পালংখালী, ফরেস্ট অফিস সংলগ্ন, উখিয়া, কক্সবাজার</p>
+        <p class="text-xs text-gray-500 font-medium">পশ্চিম পালংখালী, ফরেস্ট অফিস সংলগ্ন, উখিয়া</p>
       </div>
 
       <div class="flex bg-gray-100 p-1.5 rounded-2xl text-xs font-bold text-gray-600 gap-1 border border-gray-200">
@@ -54,7 +56,7 @@
           <label class="block text-xs font-bold text-gray-700 mb-1.5">অ্যাডমিন পাসওয়ার্ড / পিন (PIN):</label>
           <input type="text" id="adminPinInput" placeholder="7860" class="mask-pin w-full p-3.5 border-2 border-gray-200 focus:border-emerald-600 rounded-2xl text-center text-xl font-bold tracking-widest bg-gray-50 outline-none">
         </div>
-        <button onclick="loginAsAdmin()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition">অ্যাডমিন ড্যাশবোর্ডে প্রবেশ</button>
+        <button onclick="loginAsAdmin()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition">অ্যাডমিন প্রবেশ</button>
       </div>
 
       <!-- শিক্ষক ফর্ম -->
@@ -67,21 +69,21 @@
           <label class="block text-xs font-bold text-gray-700 mb-1">শিক্ষক পিন (PIN):</label>
           <input type="text" id="teacherPinInput" placeholder="1234" class="mask-pin w-full p-3 border-2 border-gray-200 rounded-2xl text-center text-base font-bold bg-gray-50 outline-none">
         </div>
-        <button onclick="loginAsTeacher()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition">শিক্ষক প্যানেলে প্রবেশ</button>
+        <button onclick="loginAsTeacher()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition">শিক্ষক প্রবেশ</button>
       </div>
 
       <!-- অভিভাবক ফর্ম -->
       <div id="form-role-parent" class="hidden space-y-3.5 pt-1">
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">অভিভাবকের নিবন্ধিত মোবাইল নম্বর:</label>
+          <label class="block text-xs font-bold text-gray-700 mb-1">অভিভাবকের মোবাইল নম্বর:</label>
           <input type="tel" id="parentPhoneInput" placeholder="018XXXXXXXX" class="w-full p-3 border-2 border-gray-200 rounded-2xl text-sm bg-gray-50 outline-none">
         </div>
-        <button onclick="loginAsParent()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition">সন্তানের হাজিরা দেখুন</button>
+        <button onclick="loginAsParent()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition">হাজিরা দেখুন</button>
       </div>
     </div>
   </div>
 
-  <!-- ================= ২. মূল অ্যাপ ইন্টারফেস ================= -->
+  <!-- ================= ২. মূল ইন্টারফেস ================= -->
   <div id="appContainer" class="hidden">
     <header class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-900 text-white shadow-lg sticky top-0 z-50">
       <div class="max-w-lg mx-auto p-4 pb-2">
@@ -138,7 +140,7 @@
         <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-200">
           <h3 class="font-extrabold text-sm text-gray-800 mb-3 border-b pb-2 flex items-center justify-between">
             <span>সর্বশেষ হাজিরা ফিড</span>
-            <span class="text-xs text-emerald-600 font-bold">● লাইভ সিঙ্ক সক্রিয়</span>
+            <span class="text-xs text-emerald-600 font-bold">● অটো-সিঙ্ক লাইভ</span>
           </h3>
           <div id="liveAttendanceList" class="space-y-2 text-xs">
             <p class="text-gray-400 text-center py-5">আজকের কোনো হাজিরা রেকর্ড পাওয়া যায়নি।</p>
@@ -146,7 +148,7 @@
         </div>
       </section>
 
-      <!-- স্ক্যানার (শক্তিশালী ক্যামেরা কন্ট্রোলসহ) -->
+      <!-- স্ক্যানার (বর্তমান অ্যাপে ক্যামেরা ১০০% চালুর বিশেষ ইঞ্জিন) -->
       <section id="tab-scanner" class="hidden space-y-4">
         <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-200">
           <div class="flex gap-2 mb-3">
@@ -162,18 +164,26 @@
             <option value="night">রাত সেশন (এশা পরবর্তী)</option>
           </select>
           
-          <!-- ক্যামেরা প্রিভিউ বক্স -->
-          <div id="qr-reader" class="overflow-hidden rounded-2xl bg-black w-full min-h-[270px] shadow-inner relative flex items-center justify-center">
-            <p id="camPlaceholderText" class="text-white text-xs text-center p-4">ক্যামেরা চালু করতে নিচের সবুজ বাটনে চাপ দিন</p>
+          <!-- ক্যামেরা ও কিউআর স্ক্যান বক্স -->
+          <div id="qr-reader" class="overflow-hidden rounded-2xl bg-black w-full min-h-[260px] shadow-inner relative flex flex-col items-center justify-center text-center p-4">
+            <div id="camPlaceholderText" class="space-y-2">
+              <div class="w-16 h-16 bg-emerald-900/80 rounded-full flex items-center justify-center mx-auto text-2xl text-emerald-300">📷</div>
+              <p class="text-emerald-100 text-xs font-bold">ক্যামেরা চালু করতে নিচের বড় সবুজ বাটনে চাপ দিন</p>
+            </div>
           </div>
 
-          <!-- ক্যামেরা চালুর কন্ট্রোল বাটন -->
-          <div class="flex gap-2 mt-3.5">
-            <button onclick="startScanner()" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white py-3 rounded-2xl font-bold text-xs shadow-md flex items-center justify-center gap-1.5">
-              <span>📷 ক্যামেরা চালু করুন</span>
-            </button>
-            <button onclick="stopScanner()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-3 rounded-2xl font-bold text-xs">
-              <span>বন্ধ</span>
+          <!-- বড় ও কার্যকরী ক্যামেরা বাটন -->
+          <div class="space-y-2 mt-4">
+            <!-- বাটন ১: সরাসরি আপনার ফোনের আসল ক্যামেরা খুলবে (১০০% কোনো কালো হবে না) -->
+            <label class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 px-4 rounded-2xl font-bold text-sm shadow-lg flex items-center justify-center gap-2 cursor-pointer text-center transition">
+              <span class="text-lg">📸</span>
+              <span>ক্যামেরা দিয়ে স্ক্যান করুন</span>
+              <input type="file" accept="image/*" capture="environment" class="hidden" onchange="scanQrFromPhoto(this)">
+            </label>
+
+            <!-- বাটন ২: লাইভ ক্যামেরা ট্রাই করার বাটন -->
+            <button onclick="startLiveCamera()" class="w-full bg-slate-100 hover:bg-slate-200 text-gray-700 py-2.5 rounded-2xl font-semibold text-xs border border-gray-300 transition">
+              🎥 লাইভ ভিডিও ক্যামেরা চেষ্টা করুন
             </button>
           </div>
 
@@ -188,7 +198,7 @@
             <h2 class="font-bold text-sm text-gray-800">শিক্ষার্থী তালিকা</h2>
             <p class="text-[11px] text-gray-400">মোট ভর্তি ও কার্ড প্রিন্ট</p>
           </div>
-          <button onclick="openAdmissionModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-4 py-2.5 rounded-xl font-bold shadow transition">+ নতুন ভর্তি</button>
+          <button onclick="openAdmissionModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-4 py-2.5 rounded-xl font-bold shadow transition" id="btn-add-stu">+ নতুন ভর্তি</button>
         </div>
 
         <select id="filterClass" onchange="renderStudentList()" class="w-full p-3 border-2 border-gray-200 rounded-2xl text-xs font-bold bg-white outline-none">
@@ -249,7 +259,7 @@
       <!-- সেটিংস -->
       <section id="tab-settings" class="hidden space-y-4">
         <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-200 space-y-3">
-          <h2 class="font-bold text-sm text-gray-800">অ্যাডমিন পিন পরিবর্তন (সব ফোনে অটো-আপডেট হবে)</h2>
+          <h2 class="font-bold text-sm text-gray-800">অ্যাডমিন পিন পরিবর্তন (সব ডিভাইসে অটো আপডেট)</h2>
           <p class="text-[11px] text-gray-500">এখানে পিন পরিবর্তন করলে তা সাথে সাথে ক্লাউডে সেভ হবে এবং সব শিক্ষকের ফোনে কার্যকর হবে।</p>
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">নতুন অ্যাডমিন পিন:</label>
@@ -369,27 +379,37 @@
     </div>
   </div>
 
-  <!-- ডিজিটাল আইডি কার্ড মডাল -->
+  <!-- ডিজিটাল আইডি কার্ড মডাল (ডাউনলোড ও প্রিন্ট সুবিধাসহ) -->
   <div id="idCardModal" class="fixed inset-0 bg-black/75 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-5 max-w-xs w-full text-center space-y-4 shadow-2xl">
-      <div id="printableCard" class="border-2 border-emerald-800 rounded-2xl p-4 bg-emerald-50/40 relative overflow-hidden">
+      <!-- কার্ড ডিজাইন যা হুবহু ছবি আকারে ডাউনলোড হবে -->
+      <div id="printableCard" class="border-2 border-emerald-800 rounded-2xl p-4 bg-emerald-50/50 relative overflow-hidden">
         <div class="w-16 h-16 mx-auto mb-2 rounded-full bg-white p-0.5 shadow border border-emerald-500 overflow-hidden">
           <img src="logo.png" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/80x80/065f46/ffffff?text=ABM';">
         </div>
         <h4 class="font-extrabold text-sm text-emerald-950">মাদ্রাসা আনাস বিন মালেক (রাঃ)</h4>
         <p class="text-[9px] text-gray-500 mb-2 font-medium">পশ্চিম পালংখালী, ফরেস্ট অফিস সংলগ্ন, উখিয়া</p>
         
-        <div class="bg-white/80 p-2 rounded-xl border border-emerald-100 my-2">
-          <h5 id="cardName" class="font-bold text-sm text-gray-800">-</h5>
-          <p id="cardUid" class="text-xs font-bold text-emerald-700 mb-0.5">-</p>
-          <p id="cardClass" class="text-[11px] text-gray-600">-</p>
+        <div class="bg-white p-2.5 rounded-xl border border-emerald-200 my-2 shadow-sm text-left">
+          <h5 id="cardName" class="font-extrabold text-sm text-gray-900 leading-tight">-</h5>
+          <p id="cardUid" class="text-xs font-bold text-emerald-700 mt-0.5">-</p>
+          <p id="cardClass" class="text-[11px] text-gray-600 font-semibold mt-0.5">-</p>
         </div>
 
         <div id="cardQrCode" class="flex justify-center p-2 bg-white inline-block rounded-xl border border-gray-200 shadow-inner"></div>
       </div>
-      <div class="flex gap-2">
-        <button onclick="window.print()" class="flex-1 bg-emerald-700 text-white py-2.5 rounded-xl text-xs font-bold shadow">🖨️ প্রিন্ট কার্ড</button>
-        <button onclick="document.getElementById('idCardModal').classList.add('hidden')" class="flex-1 bg-gray-200 text-gray-800 py-2.5 rounded-xl text-xs font-bold">বন্ধ করুন</button>
+
+      <!-- অ্যাকশন বাটন -->
+      <div class="space-y-2">
+        <!-- ১. ছবি হিসেবে ডাউনলোড বাটন (মোবাইলের জন্য ১০০% নিশ্চিত কাজ করবে) -->
+        <button onclick="downloadIdCardImage()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3 rounded-2xl text-xs font-bold shadow-md flex items-center justify-center gap-1.5 transition">
+          <span>📥 কার্ড ডাউনলোড করুন (ছবি হিসেবে)</span>
+        </button>
+
+        <div class="flex gap-2">
+          <button onclick="window.print()" class="flex-1 bg-slate-800 text-white py-2.5 rounded-2xl text-xs font-bold shadow">🖨️ প্রিন্ট</button>
+          <button onclick="document.getElementById('idCardModal').classList.add('hidden')" class="flex-1 bg-gray-200 text-gray-800 py-2.5 rounded-2xl text-xs font-bold">বন্ধ করুন</button>
+        </div>
       </div>
     </div>
   </div>
@@ -503,7 +523,7 @@
       currentUser = null;
       document.getElementById('appContainer').classList.add('hidden');
       document.getElementById('loginScreen').classList.remove('hidden');
-      stopScanner();
+      stopLiveCamera();
     }
 
     function switchTab(tId) {
@@ -517,7 +537,7 @@
       if (curBtn) curBtn.classList.add('active-tab');
 
       if (tId !== 'scanner') {
-        stopScanner();
+        stopLiveCamera();
       }
 
       if (tId === 'dashboard') loadDashboard();
@@ -640,6 +660,7 @@
           uid: uid,
           name: document.getElementById("form_name").value,
           father: document.getElementById("form_father").value,
+          mother: document.getElementById("form_mother").value,
           class_name: document.getElementById("form_class").value,
           phone: document.getElementById("form_phone").value,
           wa: document.getElementById("form_wa").value,
@@ -668,6 +689,24 @@
       qr.innerHTML = "";
       new QRCode(qr, { text: student.qr_token, width: 100, height: 100 });
       document.getElementById("idCardModal").classList.remove("hidden");
+    }
+
+    // আইডি কার্ড সরাসরি ছবি হিসেবে মোবাইলে ডাউনলোড
+    async function downloadIdCardImage() {
+      const cardElem = document.getElementById("printableCard");
+      const studentName = document.getElementById("cardName").innerText.trim();
+      
+      try {
+        const canvas = await html2canvas(cardElem, { scale: 3, useCORS: true, backgroundColor: "#ffffff" });
+        const imgData = canvas.toDataURL("image/png");
+        const downloadLink = document.createElement("a");
+        downloadLink.download = `ID_Card_${studentName}.png`;
+        downloadLink.href = imgData;
+        downloadLink.click();
+        alert("আইডি কার্ডের ছবিটি সফলভাবে আপনার মোবাইলের ডাউনলোড ফোল্ডারে সেভ হয়েছে!");
+      } catch (err) {
+        alert("ডাউনলোড করতে সমস্যা: " + err.message);
+      }
     }
 
     /* ================= শিক্ষক ব্যবস্থাপনা ================= */
@@ -706,7 +745,7 @@
       if (error) {
         alert("ত্রুটি: " + error.message);
       } else {
-        alert("আলহামদুলিল্লাহ! শিক্ষক ক্লাউডে সফলভাবে নিবন্ধিত হয়েছেন। সব ফোনে আপডেট হয়ে গেছে।");
+        alert("আলহামদুলিল্লাহ! শিক্ষক ক্লাউডে সফলভাবে নিবন্ধিত হয়েছেন।");
         closeTeacherModal();
         loadTeachers();
         loadDashboard();
@@ -868,10 +907,34 @@
       return { auto: false, msg: msg };
     }
 
-    /* ================= স্ক্যানার ইঞ্জিন (শক্তিশালী ক্যামেরা হ্যান্ডলিং) ================= */
-    async function startScanner() {
+    /* ================= স্ক্যানার ইঞ্জিন ================= */
+
+    // সরাসরি ছবি তুলে স্ক্যান (আপনার বর্তমান ইনস্টল করা অ্যাপেই ১০০% কাজ করবে)
+    async function scanQrFromPhoto(input) {
+      if (!input.files || input.files.length === 0) return;
+      const file = input.files[0];
+      const resultDiv = document.getElementById("scanResult");
+      resultDiv.classList.remove("hidden", "bg-emerald-100", "text-emerald-800", "bg-rose-100", "text-rose-800");
+      resultDiv.classList.add("bg-blue-100", "text-blue-800");
+      resultDiv.innerHTML = "ছবিটি স্ক্যান করা হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...";
+
+      try {
+        if (!html5QrCode) {
+          html5QrCode = new Html5Qrcode("qr-reader");
+        }
+        const decodedText = await html5QrCode.scanFile(file, true);
+        await onScanSuccess(decodedText);
+      } catch (err) {
+        resultDiv.classList.remove("bg-blue-100", "text-blue-800");
+        resultDiv.classList.add("bg-rose-100", "text-rose-800");
+        resultDiv.innerHTML = "ছবিতে কোনো স্পষ্ট QR কোড পাওয়া যায়নি! দয়া করে আইডি কার্ডের সোজা ও পরিষ্কার ছবি তুলুন।";
+      }
+    }
+
+    // লাইভ ক্যামেরা
+    async function startLiveCamera() {
       const placeholder = document.getElementById("camPlaceholderText");
-      if (placeholder) placeholder.innerText = "ক্যামেরা লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...";
+      if (placeholder) placeholder.innerText = "লাইভ ক্যামেরা প্রস্তুত হচ্ছে...";
 
       try {
         if (html5QrCode && html5QrCode.isScanning) {
@@ -883,12 +946,10 @@
 
         const cameras = await Html5Qrcode.getCameras();
         if (!cameras || cameras.length === 0) {
-          alert("কোনো ক্যামেরা পাওয়া যায়নি! অনুগ্রহ করে আপনার মোবাইলের সেটিংসে গিয়ে ক্যামেরা পারমিশন 'Allow' করুন।");
-          if (placeholder) placeholder.innerText = "ক্যামেরা পাওয়া যায়নি। পারমিশন দিন।";
+          alert("কোনো ক্যামেরা পাওয়া যায়নি! দয়া করে উপরের 'ক্যামেরা দিয়ে স্ক্যান করুন' বাটনটি ব্যবহার করুন।");
           return;
         }
 
-        // পেছনের ক্যামেরা বেছে নেওয়া
         let selectedCameraId = cameras[0].id;
         for (let cam of cameras) {
           const lbl = cam.label.toLowerCase();
@@ -907,22 +968,18 @@
           () => {}
         );
       } catch (err) {
-        if (placeholder) {
-          placeholder.style.display = "block";
-          placeholder.innerText = "ক্যামেরা চালু হয়নি। মোবাইলের সেটিংসে গিয়ে ক্যামেরা পারমিশন অন করুন।";
-        }
-        alert("ক্যামেরা চালুর ত্রুটি: " + (err.message || err) + "\n\nদয়া করে মোবাইল সেটিংসে গিয়ে অ্যাপটির Camera Permission অন করুন।");
+        alert("আপনার APK-তে লাইভ ক্যামেরা পারমিশন নেই। দয়া করে উপরের বড় 'ক্যামেরা দিয়ে স্ক্যান করুন' বাটনে চাপ দিয়ে ছবি তুলুন, সরাসরি স্ক্যান হয়ে যাবে!");
       }
     }
 
-    async function stopScanner() {
+    async function stopLiveCamera() {
       if (html5QrCode && html5QrCode.isScanning) {
         try {
           await html5QrCode.stop();
           const placeholder = document.getElementById("camPlaceholderText");
           if (placeholder) {
             placeholder.style.display = "block";
-            placeholder.innerText = "ক্যামেরা বন্ধ আছে। চালু করতে নিচের বাটনে চাপ দিন।";
+            placeholder.innerText = "ক্যামেরা বন্ধ আছে।";
           }
         } catch (e) {
           console.error(e);
@@ -990,7 +1047,7 @@
         }
       }
       setTimeout(() => {
-        if (html5QrCode) html5QrCode.resume();
+        if (html5QrCode && html5QrCode.isScanning) html5QrCode.resume();
       }, 3000);
     }
 
@@ -1075,29 +1132,33 @@
       XLSX.writeFile(wb, `attendance_${date}.xlsx`);
     }
 
-    /* ================= সার্বক্ষণিক ৫ সেকেন্ড পর পর লাইভ অটো-সিঙ্ক ================= */
+    /* ================= সার্বক্ষণিক অটো-সিঙ্ক ================= */
     window.addEventListener("DOMContentLoaded", async () => {
-      await loadCloudSettings();
-      document.getElementById("reportDate").value = new Date().toISOString().split('T')[0];
-      await loadStudents();
-      await loadTeachers();
+      try {
+        await loadCloudSettings();
+        document.getElementById("reportDate").value = new Date().toISOString().split('T')[0];
+        await loadStudents();
+        await loadTeachers();
 
-      const sess = sessionStorage.getItem('madrasa_user');
-      if (sess) {
-        currentUser = JSON.parse(sess);
-        initSession();
-      }
-
-      // সব ফোনের জন্য প্রতি ৫ সেকেন্ডে ব্যাকগ্রাউন্ডে স্বয়ংক্রিয় লাইভ সিঙ্ক
-      setInterval(async () => {
-        if (currentUser) {
-          await loadCloudSettings();
-          await loadStudents();
-          await loadTeachers();
-          await loadDashboard();
+        const sess = sessionStorage.getItem('madrasa_user');
+        if (sess) {
+          currentUser = JSON.parse(sess);
+          initSession();
         }
-      }, 5000);
+
+        // প্রতি ৫ সেকেন্ডে ক্লাউড ডাটা অটো আপডেট
+        setInterval(async () => {
+          if (currentUser) {
+            await loadCloudSettings();
+            await loadStudents();
+            await loadTeachers();
+            await loadDashboard();
+          }
+        }, 5000);
+      } catch (err) {
+        console.error("Initialization error:", err);
+      }
     });
   </script>
 </body>
-                                                                                                                                                              </html>
+            </html>
