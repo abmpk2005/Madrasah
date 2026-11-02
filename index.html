@@ -8,6 +8,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#065f46">
   
+  <!-- প্রয়োজনীয় লাইব্রেরি -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
@@ -83,7 +84,7 @@
   <!-- ================= ২. মূল অ্যাপ্লিকেশন ================= -->
   <div id="appContainer" class="hidden">
 
-    <!-- মাদ্রাসার অফিসিয়াল গ্রিন ব্যানার (স্ক্রিনশট ৯ অনুযায়ী) -->
+    <!-- মাদ্রাসার অফিসিয়াল গ্রিন ব্যানার -->
     <header class="bg-[#054a37] text-white shadow-md relative overflow-hidden">
       <div class="max-w-md mx-auto p-4 pb-3 text-center space-y-1.5">
         <div class="flex justify-between items-center text-[10px] text-emerald-200 border-b border-emerald-800/60 pb-1.5">
@@ -111,7 +112,7 @@
       </div>
     </header>
 
-    <!-- ছুটি অ্যালার্ট ব্যানার (মাদ্রাসা বন্ধ থাকলে এটি জ্বলে উঠবে) -->
+    <!-- ছুটি অ্যালার্ট ব্যানার -->
     <div id="holidayBannerAlert" class="hidden max-w-md mx-auto m-3 p-3.5 bg-rose-600 text-white rounded-2xl shadow-md text-center space-y-0.5">
       <div class="text-xs font-extrabold flex items-center justify-center gap-1.5">
         <span class="text-base">🛑</span>
@@ -123,7 +124,7 @@
     <!-- মূল কন্টেন্ট স্ক্রিনসমূহ -->
     <main class="max-w-md mx-auto p-3.5 space-y-4">
 
-      <!-- ================= ট্যাব ক: ১২-গ্রিড হোম লঞ্চার (স্ক্রিনশট ৮) ================= -->
+      <!-- ================= ট্যাব ক: ১২-গ্রিড হোম ড্যাশবোর্ড (ডিফল্ট ল্যান্ডিং পেজ) ================= -->
       <section id="view-grid" class="space-y-4">
         <div class="grid grid-cols-3 gap-3">
           <!-- ১. উপস্থিতি -->
@@ -174,13 +175,13 @@
             <span class="text-xs font-bold text-gray-700">অভিভাবক</span>
           </button>
 
-          <!-- ৯. ছুটি ম্যানেজমেন্ট -->
+          <!-- ৯. ছুটি মোড -->
           <button onclick="openTab('holidays')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center text-xl shadow-sm">🛑</div>
             <span class="text-xs font-bold text-gray-700">ছুটি মোড</span>
           </button>
 
-          <!-- ১০. ফি কালেকশন -->
+          <!-- ১০. শিক্ষার্থী ফি -->
           <button onclick="openTab('fees')" class="bg-white p-3.5 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-2 hover:shadow-md transition">
             <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl shadow-sm">💳</div>
             <span class="text-xs font-bold text-gray-700">শিক্ষার্থী ফি</span>
@@ -200,15 +201,13 @@
         </div>
       </section>
 
-      <!-- ================= ট্যাব খ: হাজিরা হাব (স্ক্রিনশট ৪) ================= -->
+      <!-- ================= ট্যাব খ: হাজিরা হাব ================= -->
       <section id="view-attendance" class="hidden space-y-3.5">
-        <!-- মোড টগল -->
         <div class="flex bg-white p-1.5 rounded-2xl border shadow-sm text-xs font-bold text-gray-600">
           <button onclick="setAttTarget('student')" id="btn-att-student" class="flex-1 py-2 rounded-xl bg-[#065f46] text-white">শিক্ষার্থী</button>
           <button onclick="setAttTarget('teacher')" id="btn-att-teacher" class="flex-1 py-2 rounded-xl text-gray-600">শিক্ষক</button>
         </div>
 
-        <!-- ডিজিটাল ঘড়ি ও পরিসংখ্যান কার্ড -->
         <div class="bg-white p-5 rounded-3xl shadow-sm border text-center space-y-3 relative overflow-hidden">
           <div class="space-y-0.5">
             <h3 class="text-3xl font-black text-gray-800 tracking-wider" id="digitalClockTime">09:04:58 AM</h3>
@@ -226,22 +225,18 @@
             </div>
           </div>
 
-          <!-- হাজিরা গ্রহণের ৩টি পথ -->
           <div class="space-y-2 pt-2">
-            <!-- পথ ১: QR স্ক্যানার বাটন -->
             <button onclick="openScannerModal()" class="w-full bg-[#065f46] hover:bg-emerald-800 text-white py-3.5 rounded-2xl font-bold text-sm shadow flex items-center justify-center gap-2">
               <span class="text-lg">⛶</span>
               <span>QR কোড স্ক্যান করে হাজিরা নিন</span>
             </button>
 
-            <!-- পথ ২: আইডি দিয়ে ব্যাকআপ হাজিরা (যদি ক্যামেরা সমস্যা করে) -->
             <button onclick="openManualIdModal()" class="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-2xl font-bold text-xs shadow flex items-center justify-center gap-2">
               <span>⌨️ আইডি / নাম দিয়ে সরাসরি হাজিরা</span>
             </button>
           </div>
         </div>
 
-        <!-- হাজিরা ফিড স্ট্যাটাস -->
         <div class="bg-white p-4 rounded-3xl shadow-sm border space-y-2">
           <h4 class="font-bold text-xs text-gray-700 border-b pb-2 flex justify-between">
             <span>আজকের হাজিরার তালিকা</span>
@@ -276,7 +271,7 @@
         </div>
       </section>
 
-      <!-- ================= ট্যাব ঘ: শিক্ষার্থী তালিকা (স্ক্রিনশট ৭) ================= -->
+      <!-- ================= ট্যাব ঘ: শিক্ষার্থী তালিকা (বিস্তারিত ও ডিলিটসহ) ================= -->
       <section id="view-students" class="hidden space-y-3.5">
         <div class="flex justify-between items-center bg-white p-3.5 rounded-2xl border shadow-sm">
           <select id="filterClassStudent" onchange="renderStudentsUI()" class="p-2 border rounded-xl text-xs font-bold bg-gray-50 outline-none">
@@ -297,19 +292,19 @@
         <div id="studentsListCardsContainer" class="space-y-2"></div>
       </section>
 
-      <!-- ================= ট্যাব ঙ: শিক্ষক তালিকা ================= -->
+      <!-- ================= ট্যাব ঙ: শিক্ষক তালিকা (QR কার্ড, বিস্তারিত ও ডিলিটসহ) ================= -->
       <section id="view-teachers" class="hidden space-y-3.5">
         <div class="flex justify-between items-center bg-white p-3.5 rounded-2xl border shadow-sm">
           <div>
             <h3 class="font-bold text-sm text-gray-800">শিক্ষকবৃন্দ</h3>
-            <p class="text-[10px] text-gray-400">উস্তাদগণের তালিকা ও কিউআর</p>
+            <p class="text-[10px] text-gray-400">উস্তাদগণের তালিকা, কার্ড ও নিয়ন্ত্রণ</p>
           </div>
           <button onclick="openTeacherModal()" class="bg-blue-600 text-white text-xs px-3.5 py-2.5 rounded-xl font-bold shadow">+ শিক্ষক যোগ করুন</button>
         </div>
         <div id="teachersListContainer" class="space-y-2"></div>
       </section>
 
-      <!-- ================= ট্যাব চ: রিপোর্ট ফাইন্ডার (স্ক্রিনশট ৫) ================= -->
+      <!-- ================= ট্যাব চ: রিপোর্ট ফাইন্ডার ================= -->
       <section id="view-reports" class="hidden space-y-3.5">
         <div class="bg-white p-5 rounded-3xl shadow-sm border space-y-3">
           <h3 class="font-extrabold text-sm text-gray-800">উপস্থিতি রিপোর্ট জেনারেটর</h3>
@@ -329,7 +324,7 @@
         </div>
       </section>
 
-      <!-- ================= ট্যাব ছ: নোটিশ বোর্ড (স্ক্রিনশট ১) ================= -->
+      <!-- ================= ট্যাব ছ: নোটিশ বোর্ড ================= -->
       <section id="view-notices" class="hidden space-y-3.5">
         <div class="flex justify-between items-center">
           <h3 class="font-extrabold text-sm text-gray-800">মাদ্রাসার নোটিশ বোর্ড</h3>
@@ -338,7 +333,7 @@
         <div id="noticeListContainer" class="space-y-2.5"></div>
       </section>
 
-      <!-- ================= ট্যাব জ: ছুটি ও বন্ধ ব্যবস্থাপনা ================= -->
+      <!-- ================= ট্যাব জ: ছুটি মোড ================= -->
       <section id="view-holidays" class="hidden space-y-3.5">
         <div class="bg-white p-5 rounded-3xl shadow-sm border space-y-3">
           <h3 class="font-extrabold text-sm text-gray-800">মাদ্রাসা ছুটি / বন্ধ নিয়ন্ত্রণ</h3>
@@ -371,7 +366,20 @@
         </div>
       </section>
 
-      <!-- ================= ট্যাব ঞ: সেটিংস ও প্রোফাইল (স্ক্রিনশট ২) ================= -->
+      <!-- ================= ট্যাব ঞ: অভিভাবক পোর্টাল ================= -->
+      <section id="view-parents" class="hidden space-y-3.5">
+        <div class="bg-white p-5 rounded-3xl shadow-sm border space-y-3">
+          <h3 class="font-extrabold text-sm text-gray-800">অভিভাবক পোর্টাল</h3>
+          <p class="text-xs text-gray-400">অভিভাবকের মোবাইল নম্বর দিয়ে সন্তানের হাজিরা দেখুন</p>
+          <div class="flex gap-2">
+            <input type="tel" id="parentSearchPhone" placeholder="018XXXXXXXX" class="flex-1 p-2.5 border rounded-xl text-xs">
+            <button onclick="searchParentChildren()" class="bg-blue-600 text-white px-4 rounded-xl text-xs font-bold">খুঁজুন</button>
+          </div>
+          <div id="parentPortalCards" class="space-y-2"></div>
+        </div>
+      </section>
+
+      <!-- ================= ট্যাব ট: সেটিংস ও প্রোফাইল ================= -->
       <section id="view-settings" class="hidden space-y-3.5">
         <div class="bg-white p-5 rounded-3xl shadow-sm border space-y-3">
           <h3 class="font-extrabold text-sm text-gray-800">অ্যাডমিন পিন পরিবর্তন</h3>
@@ -381,7 +389,7 @@
       </section>
     </main>
 
-    <!-- ================= ৩. সেন্ট্রাল ডক বটম নেভিগেশন (স্ক্রিনশট অনুযায়ী) ================= -->
+    <!-- ================= ৩. সেন্ট্রাল ডক বটম নেভিগেশন ================= -->
     <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-1.5 px-3 z-40 shadow-[0_-4px_15px_rgba(0,0,0,0.06)]">
       <div class="max-w-md mx-auto flex justify-between items-center text-[10px] font-bold text-gray-500">
         <!-- ১. ক্লাসসমূহ -->
@@ -398,7 +406,7 @@
 
         <!-- ৩. সেন্ট্রাল উঁচুতে থাকা নীল গ্রিড লঞ্চার বাটন -->
         <div class="flex flex-col items-center -mt-6">
-          <button onclick="openTab('grid')" class="w-13 h-13 w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl shadow-lg border-4 border-white active:scale-95 transition">
+          <button onclick="openTab('grid')" class="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl shadow-lg border-4 border-white active:scale-95 transition">
             ⊞
           </button>
           <span class="text-[9px] text-blue-700 font-extrabold mt-0.5">মেনু</span>
@@ -421,7 +429,7 @@
 
   <!-- ================= ৪. মডালসমূহ ================= -->
 
-  <!-- মডাল ১: আইডি দিয়ে ম্যানুয়াল হাজিরা (ক্যামেরা নষ্ট থাকলে ব্যাকআপ) -->
+  <!-- মডাল ১: আইডি দিয়ে ম্যানুয়াল হাজিরা -->
   <div id="manualIdModal" class="fixed inset-0 bg-black/75 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl space-y-3">
       <div class="flex justify-between items-center border-b pb-2">
@@ -429,7 +437,7 @@
         <button onclick="document.getElementById('manualIdModal').classList.add('hidden')" class="text-gray-400 font-bold text-xl">&times;</button>
       </div>
       <div>
-        <label class="block text-xs font-bold text-gray-600 mb-1">শিক্ষার্থী নির্বাচন বা আইডি লিখুন:</label>
+        <label class="block text-xs font-bold text-gray-600 mb-1">শিক্ষার্থী বা শিক্ষক নির্বাচন করুন:</label>
         <input type="text" id="manualInputSearch" oninput="filterManualStudentList()" placeholder="আইডি বা নাম দিয়ে খুঁজুন..." class="w-full p-2.5 border rounded-xl text-xs mb-2">
         <div id="manualStudentsDropdown" class="max-h-48 overflow-y-auto space-y-1.5 border p-1 rounded-xl bg-gray-50 text-xs"></div>
       </div>
@@ -448,7 +456,6 @@
         ক্যামেরা চালু হচ্ছে...
       </div>
 
-      <!-- ছবি তুলে স্ক্যান (১০০% কোনো কালো হবে না) -->
       <label class="w-full bg-[#065f46] hover:bg-emerald-800 text-white py-3 rounded-2xl font-bold text-xs shadow flex items-center justify-center gap-1.5 cursor-pointer">
         <span>📸 ক্যামেরা দিয়ে ছবি তুলে স্ক্যান</span>
         <input type="file" accept="image/*" capture="environment" class="hidden" onchange="scanQrFromCapturedPhoto(this)">
@@ -457,48 +464,42 @@
     </div>
   </div>
 
-  <!-- মডাল ৩: প্রিমিয়াম ডিজিটাল আইডি কার্ড (স্ক্রিনশট ৩ অনুযায়ী) -->
+  <!-- মডাল ৩: ডিজিটাল আইডি কার্ড (শিক্ষার্থী ও শিক্ষক উভয়ের জন্য) -->
   <div id="idCardModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-4 max-w-xs w-full text-center space-y-3 shadow-2xl">
-      <!-- কার্ড আর্টওয়ার্ক -->
       <div id="printableCard" class="bg-[#faf8f5] rounded-3xl border-2 border-[#065f46] overflow-hidden relative shadow-md text-left pb-4">
-        <!-- উপরের কার্ভড হেডার -->
         <div class="bg-[#054a37] text-white pt-4 pb-8 px-3 text-center rounded-b-[40px] relative">
           <h4 class="font-black text-sm tracking-wide leading-tight">মাদ্রাসা আনাস বিন মালেক (রাঃ)</h4>
           <p class="text-[9px] text-emerald-200 mt-0.5">পশ্চিম পালংখালী, ফরেস্ট অফিস সংলগ্ন, উখিয়া</p>
         </div>
 
-        <!-- গোল শিক্ষার্থী ছবি -->
         <div class="w-20 h-20 mx-auto -mt-10 rounded-full bg-white p-1 shadow-lg border-2 border-emerald-600 overflow-hidden relative z-10">
-          <img id="cardStudentPhoto" src="https://via.placeholder.com/100" alt="Student" class="w-full h-full object-cover rounded-full">
+          <img id="cardStudentPhoto" src="https://via.placeholder.com/100" alt="Person" class="w-full h-full object-cover rounded-full">
         </div>
 
-        <!-- শিক্ষার্থীর নাম -->
         <div class="text-center px-4 pt-2">
-          <h3 id="cardStudentName" class="text-base font-black text-[#065f46] leading-tight">নুসরাত জাহান মিম</h3>
+          <h3 id="cardStudentName" class="text-base font-black text-[#065f46] leading-tight">নাম</h3>
         </div>
 
-        <!-- বিস্তারিত তথ্য টেবিল -->
         <div class="px-5 py-2.5 text-xs font-bold text-gray-700 space-y-1">
           <div class="flex justify-between border-b border-gray-200 pb-0.5">
-            <span class="text-gray-500">শিক্ষার্থী আইডি</span>
+            <span class="text-gray-500" id="cardLabelId">আইডি</span>
             <span id="cardStudentUid" class="text-emerald-900">: STD-1001</span>
           </div>
           <div class="flex justify-between border-b border-gray-200 pb-0.5">
-            <span class="text-gray-500">ক্লাস</span>
+            <span class="text-gray-500" id="cardLabelClass">ক্লাস / পদবী</span>
             <span id="cardStudentClass">: হিফজ বিভাগ</span>
           </div>
-          <div class="flex justify-between border-b border-gray-200 pb-0.5">
+          <div class="flex justify-between border-b border-gray-200 pb-0.5" id="cardRollRow">
             <span class="text-gray-500">রোল</span>
             <span id="cardStudentRoll">: ১</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-gray-500">Session</span>
-            <span>: 2026</span>
+            <span class="text-gray-500">সেশন</span>
+            <span>: ২০২৬</span>
           </div>
         </div>
 
-        <!-- QR কোড ও অধ্যক্ষের স্বাক্ষর -->
         <div class="px-5 pt-2 flex justify-between items-end">
           <div class="text-center">
             <div class="w-16 border-b border-gray-800 mb-0.5"></div>
@@ -517,17 +518,16 @@
     </div>
   </div>
 
-  <!-- মডাল ৪: শিক্ষার্থী ভর্তি (ছবি সহ) -->
+  <!-- মডাল ৪: শিক্ষার্থী ভর্তি ও এডিট (ছবি সহ) -->
   <div id="admissionModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-5 max-h-[85vh] overflow-y-auto space-y-3">
       <div class="flex justify-between items-center border-b pb-2">
-        <h4 class="font-bold text-sm text-gray-800">নতুন শিক্ষার্থী ভর্তি ফর্ম</h4>
+        <h4 class="font-bold text-sm text-gray-800" id="admissionModalTitle">নতুন শিক্ষার্থী ভর্তি ফর্ম</h4>
         <button onclick="closeAdmissionModal()" class="text-gray-400 font-bold text-2xl">&times;</button>
       </div>
       <form id="admissionForm" onsubmit="handleAdmissionSubmit(event)" class="space-y-2.5 text-xs">
         <input type="hidden" id="form_edit_id">
         
-        <!-- ছবি আপলোড প্রিভিউ -->
         <div class="text-center">
           <div class="w-16 h-16 rounded-full mx-auto bg-gray-100 border-2 border-dashed border-emerald-500 overflow-hidden flex items-center justify-center cursor-pointer relative" onclick="document.getElementById('form_photo_input').click()">
             <img id="formPhotoPreview" src="https://via.placeholder.com/80?text=ছবি" class="w-full h-full object-cover">
@@ -539,23 +539,26 @@
         <input type="text" id="form_name" placeholder="শিক্ষার্থীর নাম *" required class="w-full p-2.5 border rounded-xl outline-none">
         <div class="grid grid-cols-2 gap-2">
           <input type="text" id="form_father" placeholder="পিতার নাম *" required class="w-full p-2.5 border rounded-xl outline-none">
-          <input type="text" id="form_roll" placeholder="রোল নম্বর *" required class="w-full p-2.5 border rounded-xl outline-none">
+          <input type="text" id="form_mother" placeholder="মাতার নাম" class="w-full p-2.5 border rounded-xl outline-none">
         </div>
-        <select id="form_class" required class="w-full p-2.5 border rounded-xl bg-white outline-none">
-          <option value="হিফজ বিভাগ">হিফজ বিভাগ</option>
-          <option value="নাজেরা বিভাগ">নাজেরা বিভাগ</option>
-          <option value="প্লে">প্লে</option>
-          <option value="নার্সারি">নার্সারি</option>
-          <option value="প্রথম শ্রেণী">প্রথম শ্রেণী</option>
-          <option value="দ্বিতীয় শ্রেণী">দ্বিতীয় শ্রেণী</option>
-          <option value="তৃতীয় শ্রেণী">তৃতীয় শ্রেণী</option>
-        </select>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="form_roll" placeholder="রোল নম্বর *" required class="w-full p-2.5 border rounded-xl outline-none">
+          <select id="form_class" required class="w-full p-2.5 border rounded-xl bg-white outline-none">
+            <option value="হিফজ বিভাগ">হিফজ বিভাগ</option>
+            <option value="নাজেরা বিভাগ">নাজেরা বিভাগ</option>
+            <option value="প্লে">প্লে</option>
+            <option value="নার্সারি">নার্সারি</option>
+            <option value="প্রথম শ্রেণী">প্রথম শ্রেণী</option>
+            <option value="দ্বিতীয় শ্রেণী">দ্বিতীয় শ্রেণী</option>
+            <option value="তৃতীয় শ্রেণী">তৃতীয় শ্রেণী</option>
+          </select>
+        </div>
         <div class="grid grid-cols-2 gap-2">
           <input type="tel" id="form_phone" placeholder="মোবাইল নম্বর *" required class="w-full p-2.5 border rounded-xl outline-none">
           <input type="tel" id="form_wa" placeholder="WhatsApp নম্বর *" required class="w-full p-2.5 border rounded-xl outline-none">
         </div>
         <input type="text" id="form_address" placeholder="ঠিকানা" class="w-full p-2.5 border rounded-xl outline-none">
-        <button type="submit" class="w-full bg-[#065f46] text-white py-3 rounded-2xl font-bold shadow">ভর্তি নিশ্চিত করুন</button>
+        <button type="submit" class="w-full bg-[#065f46] text-white py-3 rounded-2xl font-bold shadow">ভর্তি সংরক্ষণ করুন</button>
       </form>
     </div>
   </div>
@@ -572,12 +575,24 @@
         <input type="text" id="t_designation" placeholder="পদবী (যেমন: সিনিয়র হিফজ শিক্ষক) *" required class="w-full p-2.5 border rounded-xl">
         <input type="tel" id="t_phone" placeholder="মোবাইল নম্বর *" required class="w-full p-2.5 border rounded-xl">
         <input type="text" id="t_pin" placeholder="লগইন পিন (যেমন: 1234) *" required class="mask-pin w-full p-2.5 border rounded-xl text-center font-bold">
-        <button type="submit" class="w-full bg-[#065f46] text-white py-3 rounded-2xl font-bold shadow">নিবন্ধন নিশ্চিত করুন</button>
+        <button type="submit" class="w-full bg-[#065f46] text-white py-3 rounded-2xl font-bold shadow">নিবন্ধন সম্পন্ন করুন</button>
       </form>
     </div>
   </div>
 
-  <!-- মডাল ৬: নোটিশ যোগ -->
+  <!-- মডাল ৬: শিক্ষার্থী/শিক্ষক বিস্তারিত দেখার মডাল -->
+  <div id="detailsModal" class="fixed inset-0 bg-black/75 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl space-y-3">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h4 class="font-bold text-sm text-gray-800" id="detailsModalTitle">বিস্তারিত বিবরণ</h4>
+        <button onclick="document.getElementById('detailsModal').classList.add('hidden')" class="text-gray-400 font-bold text-xl">&times;</button>
+      </div>
+      <div id="detailsModalBody" class="space-y-2 text-xs text-gray-700 bg-gray-50 p-3 rounded-2xl border"></div>
+      <button onclick="document.getElementById('detailsModal').classList.add('hidden')" class="w-full bg-[#065f46] text-white py-2.5 rounded-xl font-bold shadow text-xs">বন্ধ করুন</button>
+    </div>
+  </div>
+
+  <!-- মডাল ৭: নোটিশ যোগ -->
   <div id="noticeModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl p-5 space-y-3">
       <div class="flex justify-between items-center border-b pb-2">
@@ -592,7 +607,7 @@
     </div>
   </div>
 
-  <!-- ================= জাভাস্ক্রিপ্ট কোড ================= -->
+  <!-- ================= ৫. জাভাস্ক্রিপ্ট কন্ট্রোলার ================= -->
   <script>
     const SUPABASE_URL = "https://gluhbzwvvxpzsxwizkyg.supabase.co";
     const SUPABASE_KEY = "sb_publishable_mfbACAPbbjw9X1p02zynhQ_KvEeYwZz";
@@ -609,13 +624,13 @@
     let teachersList = [];
     let noticesList = [];
     let holidaySettings = { isHoliday: false, reason: 'পবিত্র জুমাবার' };
-    let currentAttTarget = 'student'; // 'student' or 'teacher'
+    let currentAttTarget = 'student';
     let studentPhotoBase64 = '';
     let html5QrModalScanner = null;
 
-    /* ================= ন্যাভিগেশন ও স্ক্রিন সুইচ ================= */
+    /* ================= ন্যাভিগেশন ================= */
     function openTab(tabName) {
-      const views = ['grid', 'attendance', 'students', 'teachers', 'reports', 'notices', 'holidays', 'fees', 'settings', 'facescan'];
+      const views = ['grid', 'attendance', 'students', 'teachers', 'reports', 'notices', 'holidays', 'fees', 'settings', 'facescan', 'parents'];
       views.forEach(v => {
         const el = document.getElementById(`view-${v}`);
         if (el) el.classList.add('hidden');
@@ -685,12 +700,15 @@
       }
     }
 
+    // লগইন বা অ্যাপ ওপেনের সময় ১২-গ্রিড ড্যাশবোর্ড ল্যান্ডিং পেজ হিসেবে আসবে
     function initApp() {
       sessionStorage.setItem('madrasa_user', JSON.stringify(currentUser));
       document.getElementById('loginScreen').classList.add('hidden');
       document.getElementById('appContainer').classList.remove('hidden');
       document.getElementById('userRoleBadge').textContent = currentUser.role === 'admin' ? 'অ্যাডমিন' : (currentUser.name || 'অভিভাবক');
-      openTab('attendance');
+      
+      // ড্যাশবোর্ড স্ক্রিন প্রথমে ওপেন করা
+      openTab('grid');
     }
 
     function logout() {
@@ -700,7 +718,24 @@
       document.getElementById('loginScreen').classList.remove('hidden');
     }
 
-    /* ================= ছুটির দিন ব্যবস্থাপনা ================= */
+    /* ================= ডিজিটাল ঘড়ি ও ছুটি ================= */
+    function startClocks() {
+      setInterval(() => {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-US');
+        const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        
+        const hClock = document.getElementById('headerLiveClock');
+        if (hClock) hClock.innerText = timeStr;
+        
+        const hubClock = document.getElementById('digitalClockTime');
+        if (hubClock) hubClock.innerText = timeStr;
+
+        const hubDate = document.getElementById('digitalClockDate');
+        if (hubDate) hubDate.innerText = dateStr;
+      }, 1000);
+    }
+
     function checkHolidayStatus() {
       const saved = JSON.parse(localStorage.getItem('madrasa_holiday') || '{"isHoliday":false,"reason":""}');
       holidaySettings = saved;
@@ -709,7 +744,7 @@
       
       if (holidaySettings.isHoliday) {
         banner.classList.remove('hidden');
-        reasonTxt.innerText = "ছুটির কারণ: " + (holidaySettings.reason || "মাদ্রাসা বন্ধ রয়েছে");
+        reasonTxt.innerText = "ছুটির বিবরণ: " + (holidaySettings.reason || "মাদ্রাসা বন্ধ রয়েছে");
       } else {
         banner.classList.add('hidden');
       }
@@ -721,7 +756,7 @@
       holidaySettings = { isHoliday: isH, reason: rsn };
       localStorage.setItem('madrasa_holiday', JSON.stringify(holidaySettings));
       checkHolidayStatus();
-      alert('ছুটি সেটিংস সফলভাবে সংরক্ষিত হয়েছে!');
+      alert('ছুটি সেটিংস সংরক্ষিত হয়েছে!');
     }
 
     function handleHolidayToggle() {
@@ -729,24 +764,6 @@
       if (isH && !document.getElementById('holidayReasonInput').value) {
         document.getElementById('holidayReasonInput').value = 'পবিত্র জুমাবার ছুটি';
       }
-    }
-
-    /* ================= ডিজিটাল ঘড়ি ================= */
-    function startClocks() {
-      setInterval(() => {
-        const now = new Date();
-        const timeStr = now.toLocaleTimeString('en-US');
-        const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        
-        const headerClock = document.getElementById('headerLiveClock');
-        if (headerClock) headerClock.innerText = timeStr;
-        
-        const hubClock = document.getElementById('digitalClockTime');
-        if (hubClock) hubClock.innerText = timeStr;
-
-        const hubDate = document.getElementById('digitalClockDate');
-        if (hubDate) hubDate.innerText = dateStr;
-      }, 1000);
     }
 
     /* ================= ডেটা লোডিং ও সিঙ্ক ================= */
@@ -760,8 +777,10 @@
 
         noticesList = JSON.parse(localStorage.getItem('madrasa_notices') || '[]');
         updateAttendanceHub();
+        renderStudentsUI();
+        renderTeachersUI();
       } catch (err) {
-        console.error(err);
+        console.error("Cloud load error:", err);
       }
     }
 
@@ -769,8 +788,8 @@
       const today = new Date().toISOString().split('T')[0];
       const { data: att } = await db.from('attendance').select('*').eq('attendance_date', today);
       
+      const totalCount = (currentAttTarget === 'student' ? studentsList.length : teachersList.length) || 0;
       const presentCount = att ? new Set(att.map(a => a.student_id)).size : 0;
-      const totalCount = studentsList.length || 0;
       const absentCount = Math.max(0, totalCount - presentCount);
 
       document.getElementById('attHubPresent').innerText = toBangla(presentCount);
@@ -779,7 +798,7 @@
       const feed = document.getElementById('attLiveFeedList');
       if (att && att.length > 0) {
         feed.innerHTML = att.slice(-5).reverse().map(a => `
-          <div class="flex justify-between items-center p-2 rounded-xl bg-gray-50 border">
+          <div class="flex justify-between items-center p-2.5 rounded-xl bg-gray-50 border">
             <span><strong>${a.student_name}</strong> (${a.class_name})</span>
             <span class="text-emerald-700 font-bold">${a.scan_time}</span>
           </div>
@@ -789,7 +808,7 @@
       }
     }
 
-    /* ================= শিক্ষার্থী ব্যবস্থাপনা ও ছবি প্রিভিউ ================= */
+    /* ================= শিক্ষার্থী ব্যবস্থাপনা ================= */
     function previewStudentPhoto(input) {
       if (input.files && input.files[0]) {
         const reader = new FileReader();
@@ -804,6 +823,7 @@
     function openAdmissionModal() {
       studentPhotoBase64 = '';
       document.getElementById('form_edit_id').value = '';
+      document.getElementById('admissionModalTitle').innerText = 'নতুন শিক্ষার্থী ভর্তি ফর্ম';
       document.getElementById('admissionForm').reset();
       document.getElementById('formPhotoPreview').src = "https://via.placeholder.com/80?text=ছবি";
       document.getElementById('admissionModal').classList.remove('hidden');
@@ -813,34 +833,89 @@
       document.getElementById('admissionModal').classList.add('hidden');
     }
 
+    function editStudent(id) {
+      const s = studentsList.find(x => x.id === id);
+      if (!s) return;
+      document.getElementById('form_edit_id').value = s.id;
+      document.getElementById('admissionModalTitle').innerText = 'শিক্ষার্থী তথ্য সংশোধন';
+      document.getElementById('form_name').value = s.name;
+      document.getElementById('form_father').value = s.father;
+      document.getElementById('form_mother').value = s.mother || '';
+      document.getElementById('form_class').value = s.class_name;
+      document.getElementById('form_roll').value = s.roll || '১';
+      document.getElementById('form_phone').value = s.phone;
+      document.getElementById('form_wa').value = s.wa;
+      document.getElementById('form_address').value = s.address || '';
+      if (s.photo) {
+        studentPhotoBase64 = s.photo;
+        document.getElementById('formPhotoPreview').src = s.photo;
+      }
+      document.getElementById('admissionModal').classList.remove('hidden');
+    }
+
+    async function deleteStudent(id) {
+      if (!confirm("আপনি কি নিশ্চিতভাবে এই শিক্ষার্থীকে মুছে ফেলতে চান?")) return;
+      const { error } = await db.from('students').delete().eq('id', id);
+      if (error) {
+        alert("ত্রুটি: " + error.message);
+      } else {
+        alert("শিক্ষার্থী সফলভাবে মুছে ফেলা হয়েছে!");
+        loadDataFromCloud();
+      }
+    }
+
+    function viewStudentDetails(id) {
+      const s = studentsList.find(x => x.id === id);
+      if (!s) return;
+      document.getElementById('detailsModalTitle').innerText = s.name + '-এর সম্পূর্ণ তথ্য';
+      document.getElementById('detailsModalBody').innerHTML = `
+        <div class="text-center pb-2 border-b">
+          <img src="${s.photo || 'https://via.placeholder.com/80'}" class="w-16 h-16 rounded-full mx-auto object-cover border-2 border-emerald-500 mb-1">
+          <h4 class="font-extrabold text-sm text-gray-800">${s.name}</h4>
+          <p class="text-[11px] text-emerald-700 font-bold">${s.class_name} • রোল: ${toBangla(s.roll || 1)}</p>
+        </div>
+        <p><strong>আইডি নম্বর:</strong> ${s.uid}</p>
+        <p><strong>পিতার নাম:</strong> ${s.father}</p>
+        <p><strong>মাতার নাম:</strong> ${s.mother || 'দেওয়া হয়নি'}</p>
+        <p><strong>অভিভাবকের ফোন:</strong> ${s.phone}</p>
+        <p><strong>WhatsApp নম্বর:</strong> ${s.wa}</p>
+        <p><strong>ঠিকানা:</strong> ${s.address || 'পশ্চিম পালংখালী'}</p>
+      `;
+      document.getElementById('detailsModal').classList.remove('hidden');
+    }
+
     async function handleAdmissionSubmit(e) {
       e.preventDefault();
       const editId = document.getElementById('form_edit_id').value;
-      const uid = 'STD-' + String(studentsList.length + 1001);
+      const uid = 'ABM-2026-' + String(studentsList.length + 1).padStart(3, '0');
       const token = 'ABM-QR-' + Math.random().toString(36).substring(2, 10).toUpperCase();
 
-      const newStudent = {
-        uid: uid,
+      const studentData = {
         name: document.getElementById('form_name').value,
         father: document.getElementById('form_father').value,
+        mother: document.getElementById('form_mother').value,
+        roll: document.getElementById('form_roll').value,
         class_name: document.getElementById('form_class').value,
         phone: document.getElementById('form_phone').value,
         wa: document.getElementById('form_wa').value,
         address: document.getElementById('form_address').value,
-        qr_token: token,
         photo: studentPhotoBase64
       };
 
       if (editId) {
-        await db.from('students').update(newStudent).eq('id', editId);
+        const { error } = await db.from('students').update(studentData).eq('id', editId);
+        if (error) alert(error.message);
+        else alert('তথ্য আপডেট হয়েছে!');
       } else {
-        await db.from('students').insert([newStudent]);
+        studentData.uid = uid;
+        studentData.qr_token = token;
+        const { error } = await db.from('students').insert([studentData]);
+        if (error) alert(error.message);
+        else alert('ভর্তি সফল হয়েছে! আইডি: ' + uid);
       }
 
-      alert('শিক্ষার্থী তথ্য সফলভাবে সংরক্ষিত হয়েছে!');
       closeAdmissionModal();
       loadDataFromCloud();
-      renderStudentsUI();
     }
 
     function renderStudentsUI() {
@@ -862,33 +937,143 @@
             <img src="${s.photo || 'https://via.placeholder.com/50'}" class="w-12 h-12 rounded-full object-cover border">
             <div>
               <h4 class="font-extrabold text-sm text-gray-800">${s.name}</h4>
-              <p class="text-[11px] text-gray-500 font-semibold">${s.class_name} • রোল ${toBangla(idx + 1)}</p>
+              <p class="text-[11px] text-gray-500 font-semibold">${s.class_name} • রোল ${toBangla(s.roll || (idx + 1))}</p>
               <p class="text-[10px] text-emerald-700 font-bold">${toBangla(s.uid)}</p>
             </div>
           </div>
-          <div class="flex items-center gap-1.5">
-            <a href="tel:${s.phone}" class="p-2 bg-emerald-50 text-emerald-700 rounded-full text-xs">📞</a>
-            <button onclick="openCardModal('${s.id}')" class="bg-[#065f46] text-white text-[11px] px-2.5 py-1.5 rounded-xl font-bold">কার্ড</button>
+          <div class="flex items-center gap-1.5 flex-wrap justify-end">
+            <a href="tel:${s.phone}" class="p-1.5 bg-emerald-50 text-emerald-700 rounded-full text-xs">📞</a>
+            <button onclick="openStudentCardModal('${s.id}')" class="bg-[#065f46] text-white text-[11px] px-2 py-1 rounded-xl font-bold">কার্ড</button>
+            <button onclick="viewStudentDetails('${s.id}')" class="bg-blue-50 text-blue-700 border border-blue-200 text-[10px] px-2 py-1 rounded-xl font-bold">বিস্তারিত</button>
+            ${currentUser && currentUser.role === 'admin' ? `
+              <button onclick="editStudent('${s.id}')" class="bg-amber-50 text-amber-700 text-[10px] px-1.5 py-1 rounded-lg font-bold">এডিট</button>
+              <button onclick="deleteStudent('${s.id}')" class="bg-rose-50 text-rose-700 text-[10px] px-1.5 py-1 rounded-lg font-bold">ডিলিট</button>
+            ` : ''}
           </div>
         `;
         container.appendChild(div);
       });
     }
 
-    /* ================= প্রিমিয়াম আইডি কার্ড পপআপ (স্ক্রিনশট ৩) ================= */
-    function openCardModal(studentId) {
+    /* ================= শিক্ষক ব্যবস্থাপনা ও আইডি কার্ড ================= */
+    function openTeacherModal() {
+      document.getElementById('teacherForm').reset();
+      document.getElementById('teacherModal').classList.remove('hidden');
+    }
+
+    async function handleTeacherSubmit(e) {
+      e.preventDefault();
+      const newT = {
+        uid: 'TEA-00' + (teachersList.length + 1),
+        name: document.getElementById('t_name').value.trim(),
+        designation: document.getElementById('t_designation').value.trim(),
+        phone: document.getElementById('t_phone').value.trim(),
+        pin: document.getElementById('t_pin').value.trim() || '1234',
+        qr_token: 'TEA-QR-' + Math.random().toString(36).substring(2, 8).toUpperCase()
+      };
+
+      const { data, error } = await db.from('teachers').insert([newT]);
+      if (error) {
+        alert("শিক্ষক যোগ করতে সমস্যা: " + error.message);
+      } else {
+        alert('আলহামদুলিল্লাহ! শিক্ষক সফলভাবে নিবন্ধিত হয়েছেন!');
+        document.getElementById('teacherModal').classList.add('hidden');
+        await loadDataFromCloud();
+        renderTeachersUI();
+      }
+    }
+
+    function renderTeachersUI() {
+      const box = document.getElementById('teachersListContainer');
+      box.innerHTML = '';
+      if (teachersList.length === 0) {
+        box.innerHTML = '<p class="text-center text-gray-400 py-4 text-xs">কোনো শিক্ষক পাওয়া যায়নি।</p>';
+        return;
+      }
+      teachersList.forEach(t => {
+        const div = document.createElement('div');
+        div.className = "bg-white p-3 rounded-2xl border shadow-sm flex justify-between items-center";
+        div.innerHTML = `
+          <div>
+            <h4 class="font-bold text-sm text-gray-800">${t.name}</h4>
+            <p class="text-xs text-emerald-700 font-semibold">${t.designation} (${t.uid})</p>
+            <p class="text-[11px] text-gray-400">ফোন: ${t.phone}</p>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap justify-end">
+            <button onclick="openTeacherCardModal('${t.id}')" class="bg-[#065f46] text-white text-[10px] px-2.5 py-1 rounded-xl font-bold">QR কার্ড</button>
+            <button onclick="viewTeacherDetails('${t.id}')" class="bg-blue-50 text-blue-700 border border-blue-200 text-[10px] px-2 py-1 rounded-xl font-bold">বিস্তারিত</button>
+            ${currentUser && currentUser.role === 'admin' ? `
+              <button onclick="deleteTeacher('${t.id}')" class="bg-rose-50 text-rose-700 border border-rose-200 text-[10px] px-2 py-1 rounded-xl font-bold">ডিলিট</button>
+            ` : ''}
+          </div>
+        `;
+        box.appendChild(div);
+      });
+    }
+
+    function viewTeacherDetails(id) {
+      const t = teachersList.find(x => x.id === id);
+      if (!t) return;
+      document.getElementById('detailsModalTitle').innerText = t.name + '-এর বিবরণ';
+      document.getElementById('detailsModalBody').innerHTML = `
+        <p><strong>শিক্ষকের নাম:</strong> ${t.name}</p>
+        <p><strong>পদবী:</strong> ${t.designation}</p>
+        <p><strong>শিক্ষক আইডি:</strong> ${t.uid}</p>
+        <p><strong>মোবাইল নম্বর:</strong> ${t.phone}</p>
+        ${currentUser && currentUser.role === 'admin' ? `<p class="text-emerald-700 font-bold"><strong>লগইন পিন:</strong> ${t.pin}</p>` : ''}
+      `;
+      document.getElementById('detailsModal').classList.remove('hidden');
+    }
+
+    async function deleteTeacher(id) {
+      if (!confirm("আপনি কি নিশ্চিতভাবে এই শিক্ষককে মুছে ফেলতে চান? এটি মুছে দিলে সব মোবাইল থেকেই মুছে যাবে।")) return;
+      const { error } = await db.from('teachers').delete().eq('id', id);
+      if (error) {
+        alert("ত্রুটি: " + error.message);
+      } else {
+        alert("শিক্ষক মুছে ফেলা হয়েছে!");
+        loadDataFromCloud();
+      }
+    }
+
+    /* ================= আইডি কার্ড জেনারেশন (স্ক্রিনশট ৩) ================= */
+    function openStudentCardModal(studentId) {
       const s = studentsList.find(x => x.id === studentId);
       if (!s) return;
+
+      document.getElementById('cardLabelId').innerText = "শিক্ষার্থী আইডি";
+      document.getElementById('cardLabelClass').innerText = "ক্লাস";
+      document.getElementById('cardRollRow').classList.remove('hidden');
 
       document.getElementById('cardStudentPhoto').src = s.photo || 'https://via.placeholder.com/100';
       document.getElementById('cardStudentName').innerText = s.name;
       document.getElementById('cardStudentUid').innerText = ": " + s.uid;
       document.getElementById('cardStudentClass').innerText = ": " + s.class_name;
-      document.getElementById('cardStudentRoll').innerText = ": ১";
+      document.getElementById('cardStudentRoll').innerText = ": " + toBangla(s.roll || 1);
 
       const qrBox = document.getElementById('cardQrContainer');
       qrBox.innerHTML = "";
       new QRCode(qrBox, { text: s.qr_token || s.uid, width: 65, height: 65 });
+
+      document.getElementById('idCardModal').classList.remove('hidden');
+    }
+
+    function openTeacherCardModal(teacherId) {
+      const t = teachersList.find(x => x.id === teacherId);
+      if (!t) return;
+
+      document.getElementById('cardLabelId').innerText = "শিক্ষক আইডি";
+      document.getElementById('cardLabelClass').innerText = "পদবী";
+      document.getElementById('cardRollRow').classList.add('hidden');
+
+      document.getElementById('cardStudentPhoto').src = 'https://via.placeholder.com/100?text=উস্তাদ';
+      document.getElementById('cardStudentName').innerText = t.name;
+      document.getElementById('cardStudentUid').innerText = ": " + t.uid;
+      document.getElementById('cardStudentClass').innerText = ": " + t.designation;
+
+      const qrBox = document.getElementById('cardQrContainer');
+      qrBox.innerHTML = "";
+      new QRCode(qrBox, { text: t.qr_token || t.uid, width: 65, height: 65 });
 
       document.getElementById('idCardModal').classList.remove('hidden');
     }
@@ -898,13 +1083,13 @@
       const name = document.getElementById('cardStudentName').innerText.trim();
       const canvas = await html2canvas(card, { scale: 3, useCORS: true, backgroundColor: '#ffffff' });
       const a = document.createElement('a');
-      a.download = `ID_Card_${name}.png`;
+      a.download = `Card_${name}.png`;
       a.href = canvas.toDataURL('image/png');
       a.click();
       alert('আইডি কার্ডের হাই-রেজোলিউশন ছবিটি আপনার ফোনে ডাউনলোড হয়েছে!');
     }
 
-    /* ================= পথ ১: QR স্ক্যানার (ক্যামেরা ও ছবি তুলে) ================= */
+    /* ================= স্ক্যানার ও ম্যানুয়াল হাজিরা ================= */
     function openScannerModal() {
       document.getElementById('scannerModal').classList.remove('hidden');
       initLiveScanner();
@@ -946,7 +1131,6 @@
       }
     }
 
-    /* ================= পথ ২: ম্যানুয়াল আইডি দিয়ে হাজিরা (ক্যামেরা ছাড়া ব্যাকআপ) ================= */
     function openManualIdModal() {
       document.getElementById('manualIdModal').classList.remove('hidden');
       document.getElementById('manualInputSearch').value = '';
@@ -958,9 +1142,11 @@
       const box = document.getElementById('manualStudentsDropdown');
       box.innerHTML = '';
 
-      const matched = studentsList.filter(s => s.name.toLowerCase().includes(q) || s.uid.toLowerCase().includes(q));
+      const list = currentAttTarget === 'student' ? studentsList : teachersList;
+      const matched = list.filter(s => s.name.toLowerCase().includes(q) || s.uid.toLowerCase().includes(q));
+
       if (matched.length === 0) {
-        box.innerHTML = '<p class="text-center text-gray-400 py-3">কোনো শিক্ষার্থী মেলেনি</p>';
+        box.innerHTML = '<p class="text-center text-gray-400 py-3">কোনো নাম মেলেনি</p>';
         return;
       }
 
@@ -970,7 +1156,7 @@
         div.innerHTML = `
           <div>
             <p class="font-bold text-gray-800">${s.name}</p>
-            <p class="text-[10px] text-gray-500">${s.uid} • ${s.class_name}</p>
+            <p class="text-[10px] text-gray-500">${s.uid} • ${s.class_name || s.designation}</p>
           </div>
           <button onclick="confirmManualAttendance('${s.id}')" class="bg-[#065f46] text-white px-3 py-1 rounded-lg text-xs font-bold">হাজিরা দিন</button>
         `;
@@ -978,29 +1164,30 @@
       });
     }
 
-    async function confirmManualAttendance(studentId) {
-      const student = studentsList.find(s => s.id === studentId);
-      if (!student) return;
+    async function confirmManualAttendance(id) {
+      const list = currentAttTarget === 'student' ? studentsList : teachersList;
+      const target = list.find(s => s.id === id);
+      if (!target) return;
 
       const today = new Date().toISOString().split('T')[0];
       const timeNow = new Date().toLocaleTimeString('bn-BD');
 
       const { error } = await db.from('attendance').insert([{
-        student_id: student.id,
-        student_name: student.name,
-        student_uid: student.uid,
-        class_name: student.class_name,
-        phone: student.phone,
-        wa: student.wa,
+        student_id: target.id,
+        student_name: target.name,
+        student_uid: target.uid,
+        class_name: target.class_name || target.designation,
+        phone: target.phone,
+        wa: target.wa || target.phone,
         attendance_date: today,
         session: 'morning',
         scan_time: timeNow
       }]);
 
       if (error) {
-        alert('সতর্কতা: এই শিক্ষার্থীর আজকের হাজিরা ইতোমধ্যে সম্পন্ন হয়েছে!');
+        alert('সতর্কতা: আজকের হাজিরা ইতোমধ্যে সম্পন্ন হয়েছে!');
       } else {
-        alert(`সফল! ${student.name}-এর হাজিরা গ্রহণ করা হয়েছে।`);
+        alert(`সফল! ${target.name}-এর হাজিরা গ্রহণ করা হয়েছে।`);
         document.getElementById('manualIdModal').classList.add('hidden');
         updateAttendanceHub();
       }
@@ -1009,35 +1196,36 @@
     async function onQrScannedSuccess(decodedText) {
       const today = new Date().toISOString().split('T')[0];
       const timeNow = new Date().toLocaleTimeString('bn-BD');
-      const student = studentsList.find(s => s.qr_token === decodedText || s.uid === decodedText);
+      
+      const list = currentAttTarget === 'student' ? studentsList : teachersList;
+      const target = list.find(s => s.qr_token === decodedText || s.uid === decodedText);
 
-      if (!student) {
+      if (!target) {
         alert('অস্বীকৃত QR কোড!');
         return;
       }
 
       const { error } = await db.from('attendance').insert([{
-        student_id: student.id,
-        student_name: student.name,
-        student_uid: student.uid,
-        class_name: student.class_name,
-        phone: student.phone,
-        wa: student.wa,
+        student_id: target.id,
+        student_name: target.name,
+        student_uid: target.uid,
+        class_name: target.class_name || target.designation,
+        phone: target.phone,
+        wa: target.wa || target.phone,
         attendance_date: today,
         session: 'morning',
         scan_time: timeNow
       }]);
 
       if (error) {
-        alert(`সতর্কতা: ${student.name}-এর আজকের হাজিরা ইতোমধ্যে নেওয়া হয়েছে!`);
+        alert(`সতর্কতা: ${target.name}-এর আজকের হাজিরা ইতোমধ্যে নেওয়া হয়েছে!`);
       } else {
-        alert(`আলহামদুলিল্লাহ! ${student.name}-এর হাজিরা সম্পন্ন।`);
+        alert(`আলহামদুলিল্লাহ! ${target.name}-এর হাজিরা সম্পন্ন।`);
         closeScannerModal();
         updateAttendanceHub();
       }
     }
 
-    /* ================= ফেস হাজিরা হ্যান্ডলার ================= */
     function processFaceAttendance(input) {
       if (input.files && input.files[0]) {
         alert('ফেস সনাক্তকরণ সফল হয়েছে! হাজিরা গ্রহণ করা হলো।');
@@ -1045,45 +1233,7 @@
       }
     }
 
-    /* ================= শিক্ষক ও নোটিশ হ্যান্ডলার ================= */
-    async function handleTeacherSubmit(e) {
-      e.preventDefault();
-      const newT = {
-        uid: 'TEA-' + String(teachersList.length + 101),
-        name: document.getElementById('t_name').value,
-        designation: document.getElementById('t_designation').value,
-        phone: document.getElementById('t_phone').value,
-        pin: document.getElementById('t_pin').value,
-        qr_token: 'TEA-QR-' + Math.random().toString(36).substring(2, 8).toUpperCase()
-      };
-      await db.from('teachers').insert([newT]);
-      alert('শিক্ষক সফলভাবে নিবন্ধিত হয়েছেন!');
-      document.getElementById('teacherModal').classList.add('hidden');
-      loadDataFromCloud();
-    }
-
-    function renderTeachersUI() {
-      const box = document.getElementById('teachersListContainer');
-      box.innerHTML = '';
-      if (teachersList.length === 0) {
-        box.innerHTML = '<p class="text-center text-gray-400 py-4 text-xs">কোনো শিক্ষক পাওয়া যায়নি।</p>';
-        return;
-      }
-      teachersList.forEach(t => {
-        const div = document.createElement('div');
-        div.className = "bg-white p-3 rounded-2xl border shadow-sm flex justify-between items-center";
-        div.innerHTML = `
-          <div>
-            <h4 class="font-bold text-sm text-gray-800">${t.name}</h4>
-            <p class="text-xs text-emerald-700 font-semibold">${t.designation} (${t.uid})</p>
-            <p class="text-[11px] text-gray-400">ফোন: ${t.phone}</p>
-          </div>
-          <span class="text-xs bg-emerald-50 text-emerald-700 px-2 py-1 rounded-lg font-bold">সক্রিয়</span>
-        `;
-        box.appendChild(div);
-      });
-    }
-
+    /* ================= নোটিশ বোর্ড ================= */
     function openAddNoticeModal() {
       document.getElementById('noticeModal').classList.remove('hidden');
     }
@@ -1124,11 +1274,11 @@
       });
     }
 
-    /* ================= রিপোর্ট ও এক্সেল ================= */
+    /* ================= এক্সেল রিপোর্ট ও সেটিংস ================= */
     async function exportToExcel() {
       const { data } = await db.from('attendance').select('*');
       if (!data || data.length === 0) { alert('কোনো হাজিরা ডাটা নেই!'); return; }
-      const rows = data.map((r, i) => ({ "ক্রমিক": i + 1, "আইডি": r.student_uid, "নাম": r.student_name, "শ্রেণি": r.class_name, "তারিখ": r.attendance_date, "সময়": r.scan_time }));
+      const rows = data.map((r, i) => ({ "ক্রমিক": i + 1, "আইডি": r.student_uid, "নাম": r.student_name, "শ্রেণি/পদবী": r.class_name, "তারিখ": r.attendance_date, "সময়": r.scan_time }));
       const ws = XLSX.utils.json_to_sheet(rows);
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, "হাজিরা");
@@ -1143,7 +1293,7 @@
       }
     }
 
-    /* ================= প্রাথমিক শুরু ================= */
+    /* ================= অ্যাপ্লিকেশন ইনিশিয়ালাইজেশন ================= */
     window.addEventListener("DOMContentLoaded", async () => {
       startClocks();
       checkHolidayStatus();
@@ -1154,7 +1304,14 @@
         currentUser = JSON.parse(sess);
         initApp();
       }
+
+      // ক্লাউড ডেটা প্রতি ৫ সেকেন্ডে অটো সিঙ্ক
+      setInterval(async () => {
+        if (currentUser) {
+          await loadDataFromCloud();
+        }
+      }, 5000);
     });
   </script>
 </body>
-              </html>
+          </html>
